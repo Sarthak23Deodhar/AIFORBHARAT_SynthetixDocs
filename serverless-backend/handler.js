@@ -175,69 +175,30 @@ module.exports.audioGenerator = async (event) => {
         // Aditi (Hindi/English), Kajal (Hindi/English Neural)
         // Attempt to translate to the chosen language first. If Polly doesn't support the script, we will catch and fallback to English.
         const voiceMap = {
-            'hi': { voiceId: 'Aditi', engine: 'standard', transLang: 'hi' },
-            'en': { voiceId: 'Kajal', engine: 'neural', transLang: 'en' },
-            'en-IN': { voiceId: 'Kajal', engine: 'neural', transLang: 'en' },
-            // Attempting native translations for all. If Polly fails (e.g. Tamil characters), we automatically fallback to English.
-            'mr': { voiceId: 'Aditi', engine: 'standard', transLang: 'mr' },
-            'ta': { voiceId: 'Aditi', engine: 'standard', transLang: 'ta' },
-            'te': { voiceId: 'Aditi', engine: 'standard', transLang: 'te' },
-            'kn': { voiceId: 'Aditi', engine: 'standard', transLang: 'kn' },
-            'ml': { voiceId: 'Aditi', engine: 'standard', transLang: 'ml' },
-            'bn': { voiceId: 'Aditi', engine: 'standard', transLang: 'bn' },
-            'gu': { voiceId: 'Aditi', engine: 'standard', transLang: 'gu' },
-            'pa': { voiceId: 'Aditi', engine: 'standard', transLang: 'pa' },
+            'hi': { voiceId: 'Aditi', engine: 'standard' },
+            'en': { voiceId: 'Kajal', engine: 'neural' },
+            'en-IN': { voiceId: 'Kajal', engine: 'neural' },
+            // For other regional languages, use Kajal (Indian English voice) to read Romanized (transliterated) text
+            'mr': { voiceId: 'Kajal', engine: 'neural' },
+            'ta': { voiceId: 'Kajal', engine: 'neural' },
+            'te': { voiceId: 'Kajal', engine: 'neural' },
+            'kn': { voiceId: 'Kajal', engine: 'neural' },
+            'ml': { voiceId: 'Kajal', engine: 'neural' },
+            'bn': { voiceId: 'Kajal', engine: 'neural' },
+            'gu': { voiceId: 'Kajal', engine: 'neural' },
+            'pa': { voiceId: 'Kajal', engine: 'neural' },
+            'or': { voiceId: 'Kajal', engine: 'neural' },
+            'as': { voiceId: 'Kajal', engine: 'neural' },
+            'sa': { voiceId: 'Kajal', engine: 'neural' },
+            'ur': { voiceId: 'Kajal', engine: 'neural' }
         };
 
-        let { voiceId, engine, transLang } = voiceMap[language] || { voiceId: 'Kajal', engine: 'neural', transLang: 'en' };
+        let { voiceId, engine } = voiceMap[language] || { voiceId: 'Kajal', engine: 'neural' };
 
-        // --- 1. Attempt Primary Translation ---
-        // AWS Polly Indian Voices natively support Hindi (Aditi, Kajal) and English (Aditi, Kajal).
-        // Sending Tamil/Telugu script to Polly results in silence or "dot" (.).
+        // Bedrock has already transliterated the audio script phonetically into English alphabets for unsupported languages.
+        // We can pass the text directly to Polly.
         let translatedText = text.substring(0, 2800);
         let finalVoiceUsed = voiceId;
-
-        // If the language is not Hindi or English, Polly cannot synthesize the native script.
-        // We bypass translation to native script and instead provide an English explanation.
-        const pollySupported = ['en', 'hi', 'en-IN'];
-
-        if (!pollySupported.includes(language)) {
-            finalVoiceUsed = 'Kajal';
-            engine = 'neural';
-            let fallbackText = text.substring(0, 2600);
-
-            // Translate the native script text back into English so Kajal can actually read it
-            try {
-                const transCmd = new TranslateTextCommand({
-                    SourceLanguageCode: 'auto',
-                    TargetLanguageCode: 'en',
-                    Text: fallbackText,
-                });
-                const transResponse = await translate.send(transCmd);
-                fallbackText = transResponse.TranslatedText;
-            } catch (e) {
-                console.log('Auto-translate to English failed for Kajal.', e.message);
-            }
-
-            translatedText = fallbackText;
-        } else if (transLang !== 'en') {
-            try {
-                // Use 'auto' instead of 'en' so that if the text is ALREADY in the target language
-                // (like from WikiViewer), AWS Translate won't mangle it.
-                const transCmd = new TranslateTextCommand({
-                    SourceLanguageCode: 'auto',
-                    TargetLanguageCode: transLang,
-                    Text: translatedText,
-                });
-                const transResponse = await translate.send(transCmd);
-                translatedText = transResponse.TranslatedText;
-            } catch (e) {
-                console.log('Primary translation failed, using English fallback.', e.message);
-                translatedText = text.substring(0, 2800);
-                finalVoiceUsed = 'Kajal';
-                engine = 'neural';
-            }
-        }
 
         let audioStream;
 
@@ -358,7 +319,11 @@ Use "graph TD" syntax. CRITICAL INSTRUCTION: ALL node labels MUST be in plain En
 Example: A["User Input"] --> B["Processing Module"]
 
 Section 3: Audio Script. Start it with "---AUDIO---".
-Write a concise 3-sentence summary of the codebase. CRITICAL INSTRUCTION: You must write this summary ENTIRELY in ENGLISH, no matter what language is requested for the text! The audio synthesis system will translate this English script downstream. Do not use any local language or transliteration here, ONLY pure English.
+Write a concise 3-sentence summary of the codebase. 
+CRITICAL INSTRUCTION: 
+If \${langName} is English, write in English. 
+If \${langName} is Hindi, write in Hindi using Devanagari script. 
+FOR ALL OTHER LANGUAGES (like Marathi, Tamil, Telugu, Kannada, Bengali, Odia, etc.), you MUST transliterate the \${langName} translation into English alphabets (Roman / Latin script). For example, do not use native scripts; instead write "Namaskar, idhu oru React application" (phonetic spelling of the regional language). The audio system will read this text using an Indian English voice, so spell it phonetically!
 
 Codebase:
 \`\`\`
@@ -387,7 +352,11 @@ Use "graph TD" syntax. CRITICAL INSTRUCTION: ALL node labels MUST be in plain En
 Example: A["User Input"] --> B["Processing Module"]
 
 Section 3: Audio Script. Start it with "---AUDIO---".
-Write a concise 3-sentence summary of the codebase. CRITICAL INSTRUCTION: You must write this summary ENTIRELY in ENGLISH, no matter what language is requested for the text! The audio synthesis system will translate this English script downstream. Do not use any local language or transliteration here, ONLY pure English.
+Write a concise 3-sentence summary of the codebase. 
+CRITICAL INSTRUCTION: 
+If \${langName} is English, write in English. 
+If \${langName} is Hindi, write in Hindi using Devanagari script. 
+FOR ALL OTHER LANGUAGES (like Marathi, Tamil, Telugu, Kannada, Bengali, Odia, etc.), you MUST transliterate the \${langName} translation into English alphabets (Roman / Latin script). For example, do not use native scripts; instead write "Namaskar, idhu oru React application" (phonetic spelling of the regional language). The audio system will read this text using an Indian English voice, so spell it phonetically!
 
 Code:
 \`\`\`${language}

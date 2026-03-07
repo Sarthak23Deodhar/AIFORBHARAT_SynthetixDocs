@@ -298,7 +298,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aiforbharat-backend/dev/1772870407983-2026-03-07T08:00:07.983Z/aiforbharat-backend.zip"
+                "S3Key": "serverless/aiforbharat-backend/dev/1772870774569-2026-03-07T08:06:14.569Z/aiforbharat-backend.zip"
               },
               "Handler": "handler.queryProcessor",
               "Runtime": "nodejs20.x",
@@ -329,7 +329,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aiforbharat-backend/dev/1772870407983-2026-03-07T08:00:07.983Z/aiforbharat-backend.zip"
+                "S3Key": "serverless/aiforbharat-backend/dev/1772870774569-2026-03-07T08:06:14.569Z/aiforbharat-backend.zip"
               },
               "Handler": "handler.audioGenerator",
               "Runtime": "nodejs20.x",
@@ -360,7 +360,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aiforbharat-backend/dev/1772870407983-2026-03-07T08:00:07.983Z/aiforbharat-backend.zip"
+                "S3Key": "serverless/aiforbharat-backend/dev/1772870774569-2026-03-07T08:06:14.569Z/aiforbharat-backend.zip"
               },
               "Handler": "handler.wikiBuilder",
               "Runtime": "nodejs20.x",
@@ -391,7 +391,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aiforbharat-backend/dev/1772870407983-2026-03-07T08:00:07.983Z/aiforbharat-backend.zip"
+                "S3Key": "serverless/aiforbharat-backend/dev/1772870774569-2026-03-07T08:06:14.569Z/aiforbharat-backend.zip"
               },
               "Handler": "handler.securityScanner",
               "Runtime": "nodejs20.x",
@@ -422,7 +422,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aiforbharat-backend/dev/1772870407983-2026-03-07T08:00:07.983Z/aiforbharat-backend.zip"
+                "S3Key": "serverless/aiforbharat-backend/dev/1772870774569-2026-03-07T08:06:14.569Z/aiforbharat-backend.zip"
               },
               "Handler": "handler.getProfile",
               "Runtime": "nodejs20.x",
@@ -453,7 +453,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aiforbharat-backend/dev/1772870407983-2026-03-07T08:00:07.983Z/aiforbharat-backend.zip"
+                "S3Key": "serverless/aiforbharat-backend/dev/1772870774569-2026-03-07T08:06:14.569Z/aiforbharat-backend.zip"
               },
               "Handler": "handler.saveProfile",
               "Runtime": "nodejs20.x",
@@ -484,7 +484,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aiforbharat-backend/dev/1772870407983-2026-03-07T08:00:07.983Z/aiforbharat-backend.zip"
+                "S3Key": "serverless/aiforbharat-backend/dev/1772870774569-2026-03-07T08:06:14.569Z/aiforbharat-backend.zip"
               },
               "Handler": "handler.webhookHandler",
               "Runtime": "nodejs20.x",
@@ -515,7 +515,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aiforbharat-backend/dev/1772870407983-2026-03-07T08:00:07.983Z/aiforbharat-backend.zip"
+                "S3Key": "serverless/aiforbharat-backend/dev/1772870774569-2026-03-07T08:06:14.569Z/aiforbharat-backend.zip"
               },
               "Handler": "handler.governanceHandler",
               "Runtime": "nodejs20.x",
@@ -546,7 +546,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aiforbharat-backend/dev/1772870407983-2026-03-07T08:00:07.983Z/aiforbharat-backend.zip"
+                "S3Key": "serverless/aiforbharat-backend/dev/1772870774569-2026-03-07T08:06:14.569Z/aiforbharat-backend.zip"
               },
               "Handler": "handler.orchestrator",
               "Runtime": "nodejs20.x",
@@ -577,7 +577,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aiforbharat-backend/dev/1772870407983-2026-03-07T08:00:07.983Z/aiforbharat-backend.zip"
+                "S3Key": "serverless/aiforbharat-backend/dev/1772870774569-2026-03-07T08:06:14.569Z/aiforbharat-backend.zip"
               },
               "Handler": "handler.contentAdapter",
               "Runtime": "nodejs20.x",
@@ -601,104 +601,104 @@
               "AdaptLogGroup"
             ]
           },
-          "ChatLambdaVersionkYb92IUnSUjAOUl5yrCyU4PpZR0PjjIhWlu1Egjo": {
+          "ChatLambdaVersionaYH0gbRVrE2Dl7ao47cfAiH9FcMnKemwmnBOkjODvGc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ChatLambdaFunction"
               },
-              "CodeSha256": "FQePOfrXXWAmefdWgFPiSoUk9HJQd7pMdOxcsrDa1ME="
+              "CodeSha256": "6W06A2oWocwvsu8HrefZXIK/1wKah5kHhkXnyOgJi8Y="
             }
           },
-          "AudioLambdaVersion2OCRMOIiDVmTtoIaWmt7BIsxoJbTarC93YBgM6QqY": {
+          "AudioLambdaVersion4dz1tv5QOjXk77BGLa0fWxmfvHYjXLMwNvm144tig": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AudioLambdaFunction"
               },
-              "CodeSha256": "FQePOfrXXWAmefdWgFPiSoUk9HJQd7pMdOxcsrDa1ME="
+              "CodeSha256": "6W06A2oWocwvsu8HrefZXIK/1wKah5kHhkXnyOgJi8Y="
             }
           },
-          "WikiLambdaVersion1v1k4z4jm9dEjWRByfQ3jKlyPcJJeDoTAykXHNTBM": {
+          "WikiLambdaVersionRYgyE95yMAeYfOOVpH0ZbZv5am6mwKcRFC4q89IHxlA": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "WikiLambdaFunction"
               },
-              "CodeSha256": "FQePOfrXXWAmefdWgFPiSoUk9HJQd7pMdOxcsrDa1ME="
+              "CodeSha256": "6W06A2oWocwvsu8HrefZXIK/1wKah5kHhkXnyOgJi8Y="
             }
           },
-          "ScanLambdaVersionBoF7icN2Jljlipnsc7MoBwpbWTpjMeo0wseBWv50": {
+          "ScanLambdaVersionOt0W0vcoltw1rOxKoNMxNid0x0XewNBioqCIaHc5s": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ScanLambdaFunction"
               },
-              "CodeSha256": "FQePOfrXXWAmefdWgFPiSoUk9HJQd7pMdOxcsrDa1ME="
+              "CodeSha256": "6W06A2oWocwvsu8HrefZXIK/1wKah5kHhkXnyOgJi8Y="
             }
           },
-          "GetProfileLambdaVersionT3wjezUpwD6BntzNPnlAAkaLJEKMdfLUagdaBEWC2Tg": {
+          "GetProfileLambdaVersionJOeH3wPVy8sGfemif3PXvqwKht28blZsO8hNODETM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetProfileLambdaFunction"
               },
-              "CodeSha256": "FQePOfrXXWAmefdWgFPiSoUk9HJQd7pMdOxcsrDa1ME="
+              "CodeSha256": "6W06A2oWocwvsu8HrefZXIK/1wKah5kHhkXnyOgJi8Y="
             }
           },
-          "SaveProfileLambdaVersionuSkBZYcVHmqjZtKj6IxJgDoHBR0UvgUOro3rAoOJ34": {
+          "SaveProfileLambdaVersionGdl5uOSNdRmSr8qGySpLdp4717CLLC80ciXWQL9xdSE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "SaveProfileLambdaFunction"
               },
-              "CodeSha256": "FQePOfrXXWAmefdWgFPiSoUk9HJQd7pMdOxcsrDa1ME="
+              "CodeSha256": "6W06A2oWocwvsu8HrefZXIK/1wKah5kHhkXnyOgJi8Y="
             }
           },
-          "WebhookLambdaVersionK1k8y72Dz6dRecbsuqQu93jIc7nD9U7wnXiB9I76SQ": {
+          "WebhookLambdaVersion6BlwB1sAkIsMsegZYHBfmwKDkLKksc2p25KQdDlKw": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "WebhookLambdaFunction"
               },
-              "CodeSha256": "FQePOfrXXWAmefdWgFPiSoUk9HJQd7pMdOxcsrDa1ME="
+              "CodeSha256": "6W06A2oWocwvsu8HrefZXIK/1wKah5kHhkXnyOgJi8Y="
             }
           },
-          "GovernanceLambdaVersiongMaxncVVQWuXwi6OpbJZAtRekTqJfPyqQ4bSKsg1ZE": {
+          "GovernanceLambdaVersionKZd0Ij4Y0Aeu6bqgvozjMnWABZNL3J0TYwXsQkyMxc4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GovernanceLambdaFunction"
               },
-              "CodeSha256": "FQePOfrXXWAmefdWgFPiSoUk9HJQd7pMdOxcsrDa1ME="
+              "CodeSha256": "6W06A2oWocwvsu8HrefZXIK/1wKah5kHhkXnyOgJi8Y="
             }
           },
-          "OrchestrateLambdaVersionIsQdK25cgxDzZ04qbuW81D7ls6rqZQL1kKPJ9vZ0Rc": {
+          "OrchestrateLambdaVersionB0IyaiWlGSplx6tChwxKIfp1MXtUS8a62oBZUYBTS7k": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "OrchestrateLambdaFunction"
               },
-              "CodeSha256": "FQePOfrXXWAmefdWgFPiSoUk9HJQd7pMdOxcsrDa1ME="
+              "CodeSha256": "6W06A2oWocwvsu8HrefZXIK/1wKah5kHhkXnyOgJi8Y="
             }
           },
-          "AdaptLambdaVersionWoKTKrS5Dc0kPdtoYrsxEDzxl6Xg7JAl5UDiulOdk": {
+          "AdaptLambdaVersionNOn4WdNyNcKppJJabB10Yr5HiNEdNLEbseRsl2z4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AdaptLambdaFunction"
               },
-              "CodeSha256": "FQePOfrXXWAmefdWgFPiSoUk9HJQd7pMdOxcsrDa1ME="
+              "CodeSha256": "6W06A2oWocwvsu8HrefZXIK/1wKah5kHhkXnyOgJi8Y="
             }
           },
           "ApiGatewayRestApi": {
@@ -1713,7 +1713,7 @@
               "AdaptLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1772870401612": {
+          "ApiGatewayDeployment1772870768254": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -2240,7 +2240,7 @@
           "ChatLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ChatLambdaVersionkYb92IUnSUjAOUl5yrCyU4PpZR0PjjIhWlu1Egjo"
+              "Ref": "ChatLambdaVersionaYH0gbRVrE2Dl7ao47cfAiH9FcMnKemwmnBOkjODvGc"
             },
             "Export": {
               "Name": "sls-aiforbharat-backend-dev-ChatLambdaFunctionQualifiedArn"
@@ -2249,7 +2249,7 @@
           "AudioLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AudioLambdaVersion2OCRMOIiDVmTtoIaWmt7BIsxoJbTarC93YBgM6QqY"
+              "Ref": "AudioLambdaVersion4dz1tv5QOjXk77BGLa0fWxmfvHYjXLMwNvm144tig"
             },
             "Export": {
               "Name": "sls-aiforbharat-backend-dev-AudioLambdaFunctionQualifiedArn"
@@ -2258,7 +2258,7 @@
           "WikiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "WikiLambdaVersion1v1k4z4jm9dEjWRByfQ3jKlyPcJJeDoTAykXHNTBM"
+              "Ref": "WikiLambdaVersionRYgyE95yMAeYfOOVpH0ZbZv5am6mwKcRFC4q89IHxlA"
             },
             "Export": {
               "Name": "sls-aiforbharat-backend-dev-WikiLambdaFunctionQualifiedArn"
@@ -2267,7 +2267,7 @@
           "ScanLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ScanLambdaVersionBoF7icN2Jljlipnsc7MoBwpbWTpjMeo0wseBWv50"
+              "Ref": "ScanLambdaVersionOt0W0vcoltw1rOxKoNMxNid0x0XewNBioqCIaHc5s"
             },
             "Export": {
               "Name": "sls-aiforbharat-backend-dev-ScanLambdaFunctionQualifiedArn"
@@ -2276,7 +2276,7 @@
           "GetProfileLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetProfileLambdaVersionT3wjezUpwD6BntzNPnlAAkaLJEKMdfLUagdaBEWC2Tg"
+              "Ref": "GetProfileLambdaVersionJOeH3wPVy8sGfemif3PXvqwKht28blZsO8hNODETM"
             },
             "Export": {
               "Name": "sls-aiforbharat-backend-dev-GetProfileLambdaFunctionQualifiedArn"
@@ -2285,7 +2285,7 @@
           "SaveProfileLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "SaveProfileLambdaVersionuSkBZYcVHmqjZtKj6IxJgDoHBR0UvgUOro3rAoOJ34"
+              "Ref": "SaveProfileLambdaVersionGdl5uOSNdRmSr8qGySpLdp4717CLLC80ciXWQL9xdSE"
             },
             "Export": {
               "Name": "sls-aiforbharat-backend-dev-SaveProfileLambdaFunctionQualifiedArn"
@@ -2294,7 +2294,7 @@
           "WebhookLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "WebhookLambdaVersionK1k8y72Dz6dRecbsuqQu93jIc7nD9U7wnXiB9I76SQ"
+              "Ref": "WebhookLambdaVersion6BlwB1sAkIsMsegZYHBfmwKDkLKksc2p25KQdDlKw"
             },
             "Export": {
               "Name": "sls-aiforbharat-backend-dev-WebhookLambdaFunctionQualifiedArn"
@@ -2303,7 +2303,7 @@
           "GovernanceLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GovernanceLambdaVersiongMaxncVVQWuXwi6OpbJZAtRekTqJfPyqQ4bSKsg1ZE"
+              "Ref": "GovernanceLambdaVersionKZd0Ij4Y0Aeu6bqgvozjMnWABZNL3J0TYwXsQkyMxc4"
             },
             "Export": {
               "Name": "sls-aiforbharat-backend-dev-GovernanceLambdaFunctionQualifiedArn"
@@ -2312,7 +2312,7 @@
           "OrchestrateLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "OrchestrateLambdaVersionIsQdK25cgxDzZ04qbuW81D7ls6rqZQL1kKPJ9vZ0Rc"
+              "Ref": "OrchestrateLambdaVersionB0IyaiWlGSplx6tChwxKIfp1MXtUS8a62oBZUYBTS7k"
             },
             "Export": {
               "Name": "sls-aiforbharat-backend-dev-OrchestrateLambdaFunctionQualifiedArn"
@@ -2321,7 +2321,7 @@
           "AdaptLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AdaptLambdaVersionWoKTKrS5Dc0kPdtoYrsxEDzxl6Xg7JAl5UDiulOdk"
+              "Ref": "AdaptLambdaVersionNOn4WdNyNcKppJJabB10Yr5HiNEdNLEbseRsl2z4"
             },
             "Export": {
               "Name": "sls-aiforbharat-backend-dev-AdaptLambdaFunctionQualifiedArn"
@@ -2498,7 +2498,7 @@
         "timeout": 29,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "ChatLambdaVersionkYb92IUnSUjAOUl5yrCyU4PpZR0PjjIhWlu1Egjo"
+        "versionLogicalId": "ChatLambdaVersionaYH0gbRVrE2Dl7ao47cfAiH9FcMnKemwmnBOkjODvGc"
       },
       "audio": {
         "handler": "handler.audioGenerator",
@@ -2534,7 +2534,7 @@
         "timeout": 29,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "AudioLambdaVersion2OCRMOIiDVmTtoIaWmt7BIsxoJbTarC93YBgM6QqY"
+        "versionLogicalId": "AudioLambdaVersion4dz1tv5QOjXk77BGLa0fWxmfvHYjXLMwNvm144tig"
       },
       "wiki": {
         "handler": "handler.wikiBuilder",
@@ -2570,7 +2570,7 @@
         "timeout": 29,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "WikiLambdaVersion1v1k4z4jm9dEjWRByfQ3jKlyPcJJeDoTAykXHNTBM"
+        "versionLogicalId": "WikiLambdaVersionRYgyE95yMAeYfOOVpH0ZbZv5am6mwKcRFC4q89IHxlA"
       },
       "scan": {
         "handler": "handler.securityScanner",
@@ -2606,7 +2606,7 @@
         "timeout": 29,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "ScanLambdaVersionBoF7icN2Jljlipnsc7MoBwpbWTpjMeo0wseBWv50"
+        "versionLogicalId": "ScanLambdaVersionOt0W0vcoltw1rOxKoNMxNid0x0XewNBioqCIaHc5s"
       },
       "getProfile": {
         "handler": "handler.getProfile",
@@ -2642,7 +2642,7 @@
         "timeout": 29,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "GetProfileLambdaVersionT3wjezUpwD6BntzNPnlAAkaLJEKMdfLUagdaBEWC2Tg"
+        "versionLogicalId": "GetProfileLambdaVersionJOeH3wPVy8sGfemif3PXvqwKht28blZsO8hNODETM"
       },
       "saveProfile": {
         "handler": "handler.saveProfile",
@@ -2678,7 +2678,7 @@
         "timeout": 29,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "SaveProfileLambdaVersionuSkBZYcVHmqjZtKj6IxJgDoHBR0UvgUOro3rAoOJ34"
+        "versionLogicalId": "SaveProfileLambdaVersionGdl5uOSNdRmSr8qGySpLdp4717CLLC80ciXWQL9xdSE"
       },
       "webhook": {
         "handler": "handler.webhookHandler",
@@ -2714,7 +2714,7 @@
         "timeout": 29,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "WebhookLambdaVersionK1k8y72Dz6dRecbsuqQu93jIc7nD9U7wnXiB9I76SQ"
+        "versionLogicalId": "WebhookLambdaVersion6BlwB1sAkIsMsegZYHBfmwKDkLKksc2p25KQdDlKw"
       },
       "governance": {
         "handler": "handler.governanceHandler",
@@ -2750,7 +2750,7 @@
         "timeout": 29,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "GovernanceLambdaVersiongMaxncVVQWuXwi6OpbJZAtRekTqJfPyqQ4bSKsg1ZE"
+        "versionLogicalId": "GovernanceLambdaVersionKZd0Ij4Y0Aeu6bqgvozjMnWABZNL3J0TYwXsQkyMxc4"
       },
       "orchestrate": {
         "handler": "handler.orchestrator",
@@ -2786,7 +2786,7 @@
         "memory": 1024,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "OrchestrateLambdaVersionIsQdK25cgxDzZ04qbuW81D7ls6rqZQL1kKPJ9vZ0Rc"
+        "versionLogicalId": "OrchestrateLambdaVersionB0IyaiWlGSplx6tChwxKIfp1MXtUS8a62oBZUYBTS7k"
       },
       "adapt": {
         "handler": "handler.contentAdapter",
@@ -2822,7 +2822,7 @@
         "timeout": 29,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "AdaptLambdaVersionWoKTKrS5Dc0kPdtoYrsxEDzxl6Xg7JAl5UDiulOdk"
+        "versionLogicalId": "AdaptLambdaVersionNOn4WdNyNcKppJJabB10Yr5HiNEdNLEbseRsl2z4"
       }
     },
     "resources": {
@@ -2980,7 +2980,7 @@
     "artifact": "C:\\Users\\sarth\\OneDrive\\Desktop\\SyCSE.Sem4\\AIFORBHARAT\\serverless-backend\\.serverless\\aiforbharat-backend.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/aiforbharat-backend/dev/1772870407983-2026-03-07T08:00:07.983Z",
+    "artifactDirectoryName": "serverless/aiforbharat-backend/dev/1772870774569-2026-03-07T08:06:14.569Z",
     "artifact": "aiforbharat-backend.zip"
   }
 }
