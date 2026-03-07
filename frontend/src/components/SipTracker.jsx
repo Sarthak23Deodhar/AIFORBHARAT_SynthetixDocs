@@ -5,8 +5,8 @@ import { t } from '../utils/translations';
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 const STATUS_COLORS = {
-    sip: { bg: 'rgba(99,102,241,0.12)', border: 'rgba(99,102,241,0.3)', text: '#818cf8' },
-    sccp: { bg: 'rgba(244,114,182,0.12)', border: 'rgba(244,114,182,0.3)', text: '#f472b6' },
+    sip: { bg: 'var(--teal-dim)', border: 'var(--teal)', text: 'var(--teal)' },
+    sccp: { bg: 'var(--saffron-dim)', border: 'var(--saffron)', text: 'var(--saffron)' },
 };
 
 const MOCK_PROPOSALS = [
@@ -89,7 +89,7 @@ export default function SipTracker({ language, skillLevel, user }) {
             <div style={styles.header}>
                 <div style={styles.headerLeft}>
                     <div style={styles.headerIcon}>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#818cf8" strokeWidth="2.5">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--saffron)" strokeWidth="2.5">
                             <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
                     </div>
@@ -105,21 +105,21 @@ export default function SipTracker({ language, skillLevel, user }) {
 
             {/* Stats row */}
             <div style={styles.statsRow}>
-                <div style={{ ...styles.statCard, borderColor: 'rgba(99,102,241,0.3)' }}>
-                    <span style={{ color: '#818cf8', fontWeight: 700, fontSize: 18 }}>{sipCount}</span>
+                <div style={{ ...styles.statCard, borderColor: 'var(--teal)' }}>
+                    <span style={{ color: 'var(--teal)', fontWeight: 700, fontSize: 18 }}>{sipCount}</span>
                     <span style={styles.statLabel}>SIPs</span>
                 </div>
-                <div style={{ ...styles.statCard, borderColor: 'rgba(244,114,182,0.3)' }}>
-                    <span style={{ color: '#f472b6', fontWeight: 700, fontSize: 18 }}>{sccpCount}</span>
+                <div style={{ ...styles.statCard, borderColor: 'var(--saffron)' }}>
+                    <span style={{ color: 'var(--saffron)', fontWeight: 700, fontSize: 18 }}>{sccpCount}</span>
                     <span style={styles.statLabel}>SCCPs</span>
                 </div>
-                <div style={{ ...styles.statCard, borderColor: 'rgba(255,255,255,0.1)' }}>
-                    <span style={{ color: '#e2e8f0', fontWeight: 700, fontSize: 18 }}>{proposals.length}</span>
+                <div style={{ ...styles.statCard, borderColor: 'var(--border-strong)' }}>
+                    <span style={{ color: 'var(--text-bright)', fontWeight: 700, fontSize: 18 }}>{proposals.length}</span>
                     <span style={styles.statLabel}>Total</span>
                 </div>
                 <div style={styles.poweredBy}>
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="#6e737a" stroke="none"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" /></svg>
-                    <span style={{ color: '#6e737a', fontSize: 10 }}>Synthetix GitHub</span>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="var(--text-muted)" stroke="none"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" /></svg>
+                    <span style={{ color: 'var(--text-muted)', fontSize: 10 }}>Synthetix GitHub</span>
                 </div>
             </div>
 
@@ -145,7 +145,7 @@ export default function SipTracker({ language, skillLevel, user }) {
                     ))}
                 </div>
                 <div style={styles.searchWrap}>
-                    <Search size={11} style={{ color: 'rgba(255,255,255,0.3)', flexShrink: 0 }} />
+                    <Search size={11} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
                     <input
                         value={search}
                         onChange={e => setSearch(e.target.value)}
@@ -157,7 +157,7 @@ export default function SipTracker({ language, skillLevel, user }) {
 
             {/* Proposal list */}
             <div style={styles.listHeader}>
-                <ScrollText size={16} color="#c084fc" />
+                <ScrollText size={16} color="var(--saffron)" />
                 <span style={styles.title}>{t(language, 'govTitle')}</span>
             </div>
             <div style={styles.subtitle}>
@@ -167,12 +167,12 @@ export default function SipTracker({ language, skillLevel, user }) {
                 {loading ? (
                     <div style={styles.loader}>
                         <div style={styles.spinnerRing} />
-                        <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12, marginTop: 10 }}>{t(language, 'sipTrackerLoading')}</span>
+                        <span style={{ color: 'var(--text-muted)', fontSize: 12, marginTop: 10 }}>{t(language, 'sipTrackerLoading')}</span>
                     </div>
                 ) : filtered.length === 0 ? (
                     <div style={styles.emptyState}>
-                        <Tag size={28} style={{ color: 'rgba(255,255,255,0.15)', marginBottom: 8 }} />
-                        <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: 12 }}>{t(language, 'noProposals')}</div>
+                        <Tag size={28} style={{ color: 'var(--text-muted)', marginBottom: 8 }} />
+                        <div style={{ color: 'var(--text-muted)', fontSize: 12 }}>{t(language, 'noProposals')}</div>
                     </div>
                 ) : (
                     filtered.map(p => {
@@ -224,7 +224,7 @@ export default function SipTracker({ language, skillLevel, user }) {
 
             {/* Footer */}
             <div style={styles.footer}>
-                <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: 10 }}>
+                <span style={{ color: 'var(--text-muted)', fontSize: 10 }}>
                     Showing {filtered.length} of {proposals.length} proposals · Live data from Synthetix GitHub
                 </span>
             </div>
@@ -244,61 +244,61 @@ const styles = {
     },
     header: {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '14px 16px 10px', borderBottom: '1px solid rgba(255,255,255,0.06)', flexShrink: 0,
+        padding: '14px 16px 10px', borderBottom: '1px solid var(--border-soft)', flexShrink: 0,
     },
     headerLeft: { display: 'flex', alignItems: 'center', gap: 10 },
     headerIcon: {
         width: 32, height: 32, borderRadius: 8,
-        background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)',
+        background: 'var(--saffron-dim)', border: '1px solid var(--saffron)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
     },
-    headerTitle: { fontSize: 13, fontWeight: 700, color: '#e2e8f0', letterSpacing: '0.01em' },
-    headerSub: { fontSize: 10, color: 'rgba(255,255,255,0.3)', marginTop: 1 },
+    headerTitle: { fontSize: 13, fontWeight: 700, color: 'var(--text-bright)', letterSpacing: '0.01em' },
+    headerSub: { fontSize: 10, color: 'var(--text-muted)', marginTop: 1 },
     refreshBtn: {
-        background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
-        borderRadius: 6, padding: '5px 8px', color: 'rgba(255,255,255,0.4)', cursor: 'pointer',
+        background: 'var(--bg-layer2)', border: '1px solid var(--border-soft)',
+        borderRadius: 6, padding: '5px 8px', color: 'var(--text-muted)', cursor: 'pointer',
         display: 'flex', alignItems: 'center',
     },
     statsRow: {
         display: 'flex', alignItems: 'center', gap: 8, padding: '10px 16px',
-        borderBottom: '1px solid rgba(255,255,255,0.04)', flexShrink: 0,
+        borderBottom: '1px solid var(--border-soft)', flexShrink: 0,
     },
     statCard: {
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
         flex: 1, padding: '8px 4px', borderRadius: 8,
-        background: 'rgba(255,255,255,0.02)', border: '1px solid',
+        background: 'var(--bg-layer2)', border: '1px solid var(--border-soft)',
         gap: 2,
     },
-    statLabel: { fontSize: 9, color: 'rgba(255,255,255,0.35)', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' },
+    statLabel: { fontSize: 9, color: 'var(--text-muted)', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' },
     poweredBy: { display: 'flex', alignItems: 'center', gap: 4, marginLeft: 'auto' },
     errorBanner: {
         padding: '7px 16px', background: 'rgba(251,191,36,0.08)',
-        borderBottom: '1px solid rgba(251,191,36,0.15)', color: '#fbbf24', flexShrink: 0,
+        borderBottom: '1px solid rgba(251,191,36,0.15)', color: 'var(--warning)', flexShrink: 0,
     },
     controls: {
         display: 'flex', alignItems: 'center', gap: 8, padding: '8px 16px',
-        borderBottom: '1px solid rgba(255,255,255,0.04)', flexShrink: 0,
+        borderBottom: '1px solid var(--border-soft)', flexShrink: 0,
     },
     filterGroup: { display: 'flex', gap: 4 },
     filterBtn: {
         display: 'inline-flex', alignItems: 'center', gap: 3,
-        padding: '3px 10px', borderRadius: 6, border: '1px solid rgba(255,255,255,0.08)',
-        background: 'transparent', color: 'rgba(255,255,255,0.3)',
+        padding: '3px 10px', borderRadius: 6, border: '1px solid var(--border-soft)',
+        background: 'transparent', color: 'var(--text-muted)',
         fontSize: 10, fontWeight: 700, fontFamily: 'inherit', cursor: 'pointer',
         letterSpacing: '0.05em', transition: 'all 0.15s',
     },
     filterBtnActive: {
-        background: 'rgba(99,102,241,0.12)', border: '1px solid rgba(99,102,241,0.3)',
-        color: '#818cf8',
+        background: 'var(--teal-dim)', border: '1px solid var(--teal)',
+        color: 'var(--teal)',
     },
     searchWrap: {
         flex: 1, display: 'flex', alignItems: 'center', gap: 6,
-        background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)',
+        background: 'var(--bg-layer2)', border: '1px solid var(--border-soft)',
         borderRadius: 7, padding: '5px 10px',
     },
     searchInput: {
         flex: 1, background: 'transparent', border: 'none', outline: 'none',
-        color: 'rgba(255,255,255,0.7)', fontSize: 11, fontFamily: "'JetBrains Mono', monospace",
+        color: 'var(--text-primary)', fontSize: 11, fontFamily: "'JetBrains Mono', monospace",
     },
     listWrap: { flex: 1, overflowY: 'auto', padding: '6px 0' },
     loader: {
@@ -307,8 +307,8 @@ const styles = {
     },
     spinnerRing: {
         width: 28, height: 28, borderRadius: '50%',
-        border: '3px solid rgba(99,102,241,0.15)',
-        borderTopColor: '#818cf8',
+        border: '3px solid var(--border-soft)',
+        borderTopColor: 'var(--saffron)',
         animation: 'spinRing 0.8s linear infinite',
     },
     emptyState: {
@@ -316,7 +316,7 @@ const styles = {
         height: 120, gap: 6,
     },
     row: {
-        borderBottom: '1px solid rgba(255,255,255,0.035)', transition: 'background 0.1s',
+        borderBottom: '1px solid var(--border-soft)', transition: 'background 0.1s',
     },
     rowMain: {
         display: 'flex', alignItems: 'center', gap: 8,
@@ -324,44 +324,51 @@ const styles = {
     },
     kindBadge: {
         fontSize: 9, fontWeight: 800, letterSpacing: '0.08em',
-        padding: '2px 7px', borderRadius: 4,
-        flexShrink: 0,
+        padding: '2px 7px', borderRadius: 4, flexShrink: 0,
     },
     rowNum: {
         fontFamily: "'JetBrains Mono', monospace", fontSize: 11,
-        color: 'rgba(255,255,255,0.55)', fontWeight: 600, minWidth: 40,
+        color: 'var(--text-secondary)', fontWeight: 600, minWidth: 40,
     },
     rowId: {
         fontFamily: "'JetBrains Mono', monospace", fontSize: 11,
-        color: 'rgba(255,255,255,0.75)', fontWeight: 700,
+        color: 'var(--text-primary)', fontWeight: 700,
     },
     summarizeBtn: {
         display: 'inline-flex', alignItems: 'center', gap: 4,
         padding: '3px 8px', borderRadius: 5,
-        border: '1px solid rgba(139,92,246,0.2)', background: 'rgba(139,92,246,0.06)',
-        color: '#a78bfa', fontSize: 10, fontWeight: 600, cursor: 'pointer',
+        border: '1px solid var(--saffron-dim)', background: 'var(--bg-layer2)',
+        color: 'var(--saffron)', fontSize: 10, fontWeight: 600, cursor: 'pointer',
         fontFamily: 'inherit', transition: 'all 0.15s',
     },
     linkBtn: {
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         width: 24, height: 24, borderRadius: 5,
-        border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.03)',
-        color: 'rgba(255,255,255,0.35)', textDecoration: 'none', flexShrink: 0,
+        border: '1px solid var(--border-soft)', background: 'var(--bg-layer2)',
+        color: 'var(--text-muted)', textDecoration: 'none', flexShrink: 0,
         transition: 'all 0.15s',
     },
     summaryBox: {
         padding: '8px 16px 12px 40px',
-        background: 'rgba(139,92,246,0.03)',
-        borderTop: '1px solid rgba(139,92,246,0.1)',
+        background: 'var(--bg-layer2)',
+        borderTop: '1px solid var(--border-soft)',
     },
-    summaryLoading: { color: 'rgba(255,255,255,0.3)', fontSize: 11, fontStyle: 'italic' },
+    summaryLoading: { color: 'var(--text-muted)', fontSize: 11, fontStyle: 'italic' },
     summaryPre: {
         margin: 0, fontFamily: "'JetBrains Mono', monospace",
-        fontSize: 11, lineHeight: 1.6, color: 'rgba(255,255,255,0.65)',
+        fontSize: 11, lineHeight: 1.6, color: 'var(--text-secondary)',
         whiteSpace: 'pre-wrap', wordBreak: 'break-word',
     },
     footer: {
-        padding: '7px 16px', borderTop: '1px solid rgba(255,255,255,0.04)',
-        flexShrink: 0, background: 'rgba(255,255,255,0.01)',
+        padding: '7px 16px', borderTop: '1px solid var(--border-soft)',
+        flexShrink: 0, background: 'var(--bg-layer2)',
+    },
+    listHeader: {
+        display: 'flex', alignItems: 'center', gap: 6, padding: '16px 16px 4px',
+    },
+    title: { fontWeight: 700, fontSize: 14, color: 'var(--text-bright)' },
+    subtitle: {
+        fontSize: 11, color: 'var(--text-muted)',
+        padding: '0 16px 16px', borderBottom: '1px solid var(--border-soft)',
     },
 };

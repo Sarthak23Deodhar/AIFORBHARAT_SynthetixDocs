@@ -189,7 +189,7 @@ module.exports.audioGenerator = async (event) => {
             'pa': { voiceId: 'Aditi', engine: 'standard', transLang: 'pa' },
         };
 
-        const { voiceId, engine, transLang } = voiceMap[language] || { voiceId: 'Kajal', engine: 'neural', transLang: 'en' };
+        let { voiceId, engine, transLang } = voiceMap[language] || { voiceId: 'Kajal', engine: 'neural', transLang: 'en' };
 
         // --- 1. Attempt Primary Translation ---
         // AWS Polly Indian Voices natively support Hindi (Aditi, Kajal) and English (Aditi, Kajal).
@@ -343,11 +343,11 @@ If JUNIOR: Use simple analogies, step-by-step logic, and avoid dense jargon.
 If SENIOR: Focus on system architecture, design patterns, and in-depth details.
 
 CRITICAL INSTRUCTION FOR LANGUAGE: You MUST generate the documentation ENTIRELY in ${langName}!
-Do not use English for explanations unless ${langName} is English. Translate all headers and text to ${langName}.
+Do not use English for explanations unless ${langName} is English. Translate all headers, bullet points, and text into ${langName}. If ${langName} is a regional language like Hindi or Marathi, use the native written script (e.g., Devanagari).
 
 Generate output in EXACTLY THREE sections separated by markers:
 
-Section 1: Markdown Documentation
+Section 1: Markdown Documentation (MUST BE WRITTEN IN ${langName})
 - ## Project Overview (what this project does, in simple terms)
 - ## Key Modules (one subsection per important file, explaining its role)
 - ## How It Works (data flow and system interactions)
@@ -372,11 +372,11 @@ If JUNIOR: Use simple analogies, step-by-step logic, and avoid dense jargon.
 If SENIOR: Focus on system architecture, design patterns, and in-depth details.
 
 CRITICAL INSTRUCTION FOR LANGUAGE: You MUST generate the documentation ENTIRELY in ${langName}!
-Do not use English for explanations unless ${langName} is English. Translate all headers and explanations to ${langName}.
+Do not use English for explanations unless ${langName} is English. Translate all headers, bullet points, and text into ${langName}. If ${langName} is a regional language like Hindi or Marathi, use the native written script (e.g., Devanagari).
 
 Generate output in EXACTLY THREE sections separated by markers:
 
-Section 1: Markdown Documentation
+Section 1: Markdown Documentation (MUST BE WRITTEN IN ${langName})
 - ## What This Code Does (simple, clear explanation)
 - ## Key Functions/Classes (explain each important piece)
 - ## Logic Flow (step-by-step walkthrough)

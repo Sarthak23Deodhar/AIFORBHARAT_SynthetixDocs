@@ -37,17 +37,25 @@ export function activate(context: vscode.ExtensionContext) {
     statusBar.show();
 
     // ── Register the existing doc generator command ──
-    const disposable = vscode.commands.registerCommand(
-        'synthetixDocsMaker.generate',
-        async (uri: vscode.Uri) => {
-            const targetUri = uri ?? vscode.workspace.workspaceFolders?.[0]?.uri;
-            if (!targetUri) {
-                vscode.window.showErrorMessage('Please open a folder or workspace before generating docs.');
-                return;
-            }
-            await generateDocumentation(targetUri, context);
+    const disposable = vscode.commands.registerCommand('synthetixDocsMaker.generate', async (uri) => {
+        const targetUri = uri ?? vscode.workspace.workspaceFolders?.[0]?.uri;
+        if (!targetUri) {
+            vscode.window.showErrorMessage('Please open a folder or workspace before generating docs.');
+            return;
         }
-    );
+
+        const langRes = await vscode.window.showQuickPick([
+            { label: 'English', value: 'en' }, { label: 'Hindi', value: 'hi' },
+            { label: 'Marathi', value: 'mr' }, { label: 'Tamil', value: 'ta' },
+            { label: 'Telugu', value: 'te' }, { label: 'Kannada', value: 'kn' },
+            { label: 'Malayalam', value: 'ml' }, { label: 'Bengali', value: 'bn' },
+            { label: 'Gujarati', value: 'gu' }, { label: 'Punjabi', value: 'pa' }
+        ], { placeHolder: 'Select Documentation Language' });
+
+        if (!langRes) return; // User cancelled
+
+        await generateDocumentation(targetUri, context, langRes.value);
+    });
 
     // ── Register the Bhasha-Chat sidebar view ──
     const chatProvider = new BhashaChatViewProvider(context.extensionUri);
@@ -135,7 +143,8 @@ export function activate(context: vscode.ExtensionContext) {
             if (!code.trim() || code.length < 50) return; // Skip trivial files
 
             try {
-                const result = await callBackend(code);
+                // Auto-docs default to English to prevent noisy prompts while typing
+                const result = await callBackend(code, 'en');
                 if (activeDocPanel) {
                     activeDocPanel.webview.html = buildWebviewHtml(
                         path.basename(doc.fileName),
@@ -321,10 +330,10 @@ class BhashaChatViewProvider implements vscode.WebviewViewProvider {
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    background: #0d1117;
-    color: #e6edf3;
-    font-family: -apple-system, "Segoe UI", sans-serif;
-    font-size: 12px;
+    background: var(--vscode-editor-background);
+    color: var(--vscode-editor-foreground);
+    font-family: var(--vscode-font-family), -apple-system, sans-serif;
+    font-size: var(--vscode-font-size, 12px);
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -332,25 +341,33 @@ class BhashaChatViewProvider implements vscode.WebviewViewProvider {
   }
   .toolbar {
     padding: 8px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid var(--vscode-panel-border);
     display: flex;
     gap: 6px;
     flex-wrap: wrap;
-    background: rgba(255,255,255,0.02);
+    background: var(--vscode-editor-background);
     flex-shrink: 0;
   }
   select, .skill-btn {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 6px;
-    color: #e6edf3;
+    background: var(--vscode-dropdown-background);
+    border: 1px solid var(--vscode-dropdown-border);
+    color: var(--vscode-dropdown-foreground);
+    border-radius: 4px;
     padding: 4px 8px;
     font-size: 11px;
     cursor: pointer;
     outline: none;
     font-family: inherit;
   }
-  .skill-btn.active { background: rgba(139,92,246,0.25); border-color: rgba(139,92,246,0.5); color: #c084fc; }
+  .skill-btn {
+    background: var(--vscode-button-secondaryBackground);
+    color: var(--vscode-button-secondaryForeground);
+    border-color: transparent;
+  }
+  .skill-btn.active {
+    background: var(--vscode-button-background);
+    color: var(--vscode-button-foreground);
+  }
   .messages {
     flex: 1;
     overflow-y: auto;
@@ -367,33 +384,32 @@ class BhashaChatViewProvider implements vscode.WebviewViewProvider {
     font-size: 12px;
   }
   .msg.user {
-    background: rgba(59,130,246,0.15);
-    border: 1px solid rgba(59,130,246,0.25);
+    background: var(--vscode-textBlockQuote-background);
+    border: 1px solid var(--vscode-textBlockQuote-border);
     align-self: flex-end;
-    color: #93c5fd;
   }
   .msg.bot {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: var(--vscode-editorWidget-background);
+    border: 1px solid var(--vscode-widget-border);
     align-self: flex-start;
   }
-  .msg.bot code { font-family: monospace; background: rgba(0,0,0,0.3); padding: 1px 4px; border-radius: 3px; }
-  .msg.bot pre { background: #000; padding: 8px; border-radius: 6px; overflow-x: auto; margin: 4px 0; }
+  .msg.bot code { font-family: var(--vscode-editor-font-family); background: var(--vscode-textCodeBlock-background); padding: 1px 4px; border-radius: 3px; }
+  .msg.bot pre { background: var(--vscode-textCodeBlock-background); padding: 8px; border-radius: 6px; overflow-x: auto; margin: 4px 0; }
   .msg.bot pre code { background: none; padding: 0; }
   .msg.thinking { opacity: 0.5; font-style: italic; }
   .input-row {
     padding: 8px;
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-top: 1px solid var(--vscode-panel-border);
     display: flex;
     gap: 6px;
     flex-shrink: 0;
   }
   textarea {
     flex: 1;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 8px;
-    color: #e6edf3;
+    background: var(--vscode-input-background);
+    border: 1px solid var(--vscode-input-border);
+    color: var(--vscode-input-foreground);
+    border-radius: 4px;
     padding: 7px 10px;
     font-size: 12px;
     font-family: inherit;
@@ -404,28 +420,28 @@ class BhashaChatViewProvider implements vscode.WebviewViewProvider {
     max-height: 80px;
   }
   button#send {
-    background: linear-gradient(135deg, #6d28d9, #4f46e5);
+    background: var(--vscode-button-background);
     border: none;
-    border-radius: 8px;
-    color: #fff;
+    border-radius: 4px;
+    color: var(--vscode-button-foreground);
     padding: 0 12px;
     cursor: pointer;
     font-size: 16px;
     flex-shrink: 0;
-    transition: opacity 0.2s;
   }
   button#send:disabled { opacity: 0.4; cursor: default; }
   .welcome {
     text-align: center;
-    color: rgba(255,255,255,0.25);
+    color: var(--vscode-descriptionForeground);
     font-size: 11px;
     margin: auto;
     padding: 20px;
     line-height: 1.6;
   }
-  .welcome strong { color: rgba(192,132,252,0.7); display: block; font-size: 13px; margin-bottom: 6px; }
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+  .welcome strong { color: var(--vscode-textLink-foreground); display: block; font-size: 13px; margin-bottom: 6px; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-thumb { background: var(--vscode-scrollbarSlider-background); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--vscode-scrollbarSlider-hoverBackground); }
 </style>
 </head>
 <body>
@@ -578,10 +594,10 @@ function scanFolder(folderPath: string): string {
  * POSTs the aggregated code to the local Lambda runner backend.
  * Returns parsed JSON with wiki_md and mermaid_code.
  */
-function callBackend(code: string): Promise<{ wiki_md: string; mermaid_code: string }> {
+function callBackend(code: string, language: string): Promise<{ wiki_md: string; mermaid_code: string }> {
     return new Promise((resolve, reject) => {
         const https = require('https') as typeof import('https');
-        const body = JSON.stringify({ code_snippet: code, language: 'multi-file project' });
+        const body = JSON.stringify({ code_snippet: code, language });
         const url = new URL(`${BACKEND_URL}/api/generate-wiki`);
         const req = https.request(
             {
@@ -612,7 +628,7 @@ function callBackend(code: string): Promise<{ wiki_md: string; mermaid_code: str
 /**
  * Main orchestrator: scan → call API → render in a Webview panel.
  */
-async function generateDocumentation(uri: vscode.Uri, context: vscode.ExtensionContext) {
+async function generateDocumentation(uri: vscode.Uri, context: vscode.ExtensionContext, language: string = 'en') {
     vscode.window.withProgress(
         {
             location: vscode.ProgressLocation.Notification,
@@ -638,7 +654,7 @@ async function generateDocumentation(uri: vscode.Uri, context: vscode.ExtensionC
             let mermaidCode: string;
 
             try {
-                const result = await callBackend(aggregatedCode);
+                const result = await callBackend(aggregatedCode, language);
                 wikiMd = result.wiki_md;
                 mermaidCode = result.mermaid_code;
             } catch (err: any) {
@@ -672,35 +688,14 @@ async function generateDocumentation(uri: vscode.Uri, context: vscode.ExtensionC
 // ─── Webview HTML Builder ──────────────────────────────────────────────────────
 
 function buildWebviewHtml(projectName: string, markdown: string, mermaidCode: string): string {
-    // Use JSON.stringify to safely embed markdown — handles backticks, quotes, etc.
-    const safeMarkdown = JSON.stringify(markdown || '');
+    // Safe markdown embedding — base64 encodes the string so we avoid all quote/newline escaping issues in JS templates
+    const base64Markdown = Buffer.from(markdown || '').toString('base64');
 
-    // Parse mermaid graph text into simple node names for a CSS card diagram
-    const nodeLines = (mermaidCode || '').split('\n');
-    const nodeMap: Record<string, string> = {};
-    // Capture node definitions like: A[Label] or A(Label)
-    const nodeDef = /^\s*([A-Za-z0-9_]+)\s*[\[(]([^\])\n]+)[\])]/;
-    for (const line of nodeLines) {
-        const m = line.match(nodeDef);
-        if (m) { nodeMap[m[1]] = m[2].trim(); }
-    }
-    // Capture arrows to build edges: A --> B or A --> B : label
-    const edgeRe = /([A-Za-z0-9_]+)\s*--?>+\s*([A-Za-z0-9_]+)/g;
-    const edges: Array<[string, string]> = [];
-    let em: RegExpExecArray | null;
-    while ((em = edgeRe.exec(mermaidCode || '')) !== null) {
-        edges.push([em[1], em[2]]);
-    }
-
-    // Build simple HTML architecture cards
-    const nodes = Object.entries(nodeMap).length > 0 ? Object.entries(nodeMap) : [];
-    const nodeCards = nodes.length > 0
-        ? nodes.map(([id, label]: [string, string]) => `
-            <div style="background:#1a1a2e;border:1px solid #333;border-radius:8px;padding:12px 16px;min-width:120px;text-align:center;">
-                <div style="font-size:10px;color:#888;font-family:monospace;margin-bottom:4px;">${id}</div>
-                <div style="font-size:13px;color:#ededed;font-weight:600;">${label}</div>
-            </div>`).join('<div style="color:#555;font-size:18px;align-self:center;">→</div>')
-        : '<div style="color:#666;font-size:13px;font-style:italic;">Architecture diagram generated — open the Documentation section for details.</div>';
+    // Pass the raw mermaid code if present
+    const cleanMermaid = (mermaidCode || '').trim();
+    const mermaidHtml = cleanMermaid
+        ? `<div class="mermaid-container"><pre class="mermaid">\n${cleanMermaid}\n</pre></div>`
+        : '<div style="color:var(--vscode-descriptionForeground);font-size:13px;font-style:italic;">Architecture diagram not generated.</div>';
 
     return /* html */`
 <!DOCTYPE html>
@@ -709,35 +704,47 @@ function buildWebviewHtml(projectName: string, markdown: string, mermaidCode: st
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Synthetix Docs Maker</title>
-    <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"><\/script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
     <style>
         :root {
-            --bg: #0a0a0a; --surface: #111; --border: rgba(255,255,255,0.1);
-            --text: #EDEDED; --muted: #888; --accent: #0070F3;
-            --font: -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
-            --mono: "JetBrains Mono","Fira Code",Consolas,monospace;
+            --bg: var(--vscode-editor-background); 
+            --surface: var(--vscode-editorWidget-background); 
+            --border: var(--vscode-panel-border);
+            --text: var(--vscode-editor-foreground); 
+            --muted: var(--vscode-descriptionForeground); 
+            --accent: var(--vscode-button-background);
+            --font: var(--vscode-font-family), -apple-system, sans-serif;
+            --mono: var(--vscode-editor-font-family), monospace;
         }
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { background:var(--bg); color:var(--text); font-family:var(--font); font-size:14px; line-height:1.6; padding:32px; max-width:900px; }
+        body { background:var(--bg); color:var(--text); font-family:var(--font); font-size:var(--vscode-font-size, 14px); line-height:1.6; padding:32px; max-width:900px; margin:0 auto; }
         header { display:flex; align-items:center; gap:12px; margin-bottom:32px; padding-bottom:20px; border-bottom:1px solid var(--border); }
-        header .badge { background:var(--accent); color:#fff; font-size:10px; font-weight:700; padding:3px 8px; border-radius:4px; text-transform:uppercase; letter-spacing:0.05em; }
-        header h1 { font-size:22px; }
+        header .badge { background:var(--accent); color:var(--vscode-button-foreground); font-size:10px; font-weight:700; padding:3px 8px; border-radius:4px; text-transform:uppercase; letter-spacing:0.05em; }
+        header h1 { font-size:22px; margin:0; }
         header span { color:var(--muted); font-size:13px; margin-left:auto; font-family:var(--mono); }
+        .toolbar { display:flex; justify-content:flex-end; margin-bottom:16px; }
+        .download-btn { background:var(--vscode-button-background); color:var(--vscode-button-foreground); border:none; padding:6px 12px; border-radius:4px; cursor:pointer; font-size:12px; display:inline-flex; align-items:center; gap:6px; }
+        .download-btn:hover { background:var(--vscode-button-hoverBackground); }
         section { background:var(--surface); border:1px solid var(--border); border-radius:8px; margin-bottom:24px; overflow:hidden; }
-        .section-header { padding:12px 20px; border-bottom:1px solid var(--border); font-size:12px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.07em; }
-        .section-body { padding:24px; }
-        h1,h2,h3 { color:#fff; margin-top:1.4em; margin-bottom:0.4em; font-weight:600; }
+        .section-header { padding:12px 20px; border-bottom:1px solid var(--border); font-size:12px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.07em; background:var(--vscode-sideBar-background); }
+        .section-body { padding:24px; overflow-x:auto; }
+        h1,h2,h3 { color:var(--vscode-editor-foreground); margin-top:1.4em; margin-bottom:0.4em; font-weight:600; }
         h1 { font-size:1.6em; border-bottom:1px solid var(--border); padding-bottom:0.3em; }
         h2 { font-size:1.3em; border-bottom:1px solid var(--border); padding-bottom:0.3em; }
         h3 { font-size:1.1em; }
         p { margin-bottom:1em; }
         ul,ol { padding-left:1.5em; margin-bottom:1em; }
         li { margin-bottom:0.3em; }
-        code { font-family:var(--mono); background:rgba(255,255,255,0.07); border:1px solid var(--border); padding:0.15em 0.4em; border-radius:4px; font-size:0.85em; }
-        pre { background:#000; border:1px solid var(--border); border-radius:6px; padding:16px; overflow-x:auto; margin-bottom:1em; }
+        code { font-family:var(--mono); background:var(--vscode-textCodeBlock-background); padding:0.15em 0.4em; border-radius:4px; font-size:0.85em; }
+        pre { background:var(--vscode-textCodeBlock-background); border:1px solid var(--border); border-radius:6px; padding:16px; overflow-x:auto; margin-bottom:1em; }
         pre code { background:none; border:none; padding:0; }
-        blockquote { border-left:3px solid var(--accent); padding:10px 16px; background:rgba(0,112,243,0.06); border-radius:0 6px 6px 0; margin:1em 0; color:var(--muted); }
-        .arch-grid { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+        blockquote { border-left:3px solid var(--accent); padding:10px 16px; background:var(--vscode-textBlockQuote-background); border-radius:0 6px 6px 0; margin:1em 0; color:var(--muted); }
+        .mermaid-container { background: var(--vscode-editor-background); padding: 16px; border-radius: 6px; border: 1px solid var(--border); text-align: center; overflow-x: auto; }
+        svg { max-width: 100%; height: auto; }
     </style>
 </head>
 <body>
@@ -747,24 +754,44 @@ function buildWebviewHtml(projectName: string, markdown: string, mermaidCode: st
         <span>Synthetix Docs Maker · Amazon Bedrock Nova</span>
     </header>
 
+    <div class="toolbar">
+        <button class="download-btn" id="btnDownload">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download Docs
+        </button>
+    </div>
+
     <section>
         <div class="section-header">📄 Auto-Generated Documentation</div>
         <div class="section-body" id="markdown-content"></div>
     </section>
 
     <section>
-        <div class="section-header">🔗 Architecture Overview</div>
+        <div class="section-header">🔗 Architecture Diagram</div>
         <div class="section-body">
-            <div class="arch-grid">${nodeCards}</div>
+            ${mermaidHtml}
         </div>
     </section>
 
-
     <script>
-        // Safe markdown embedding — JSON.stringify handles backticks and special chars
-        const md = JSON.parse(${safeMarkdown});
-        document.getElementById('markdown-content').innerHTML = marked.parse(md);
-    <\/script>
+        // Use base64 string to avoid all JSON parsing / quote escaping issues
+        const base64Md = "${base64Markdown}";
+        const rawMd = decodeURIComponent(escape(window.atob(base64Md)));
+        document.getElementById('markdown-content').innerHTML = marked.parse(rawMd);
+
+        // Download functionality
+        document.getElementById('btnDownload').addEventListener('click', () => {
+            const blob = new Blob([rawMd], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '${projectName}-docs.md';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+    </script>
 </body>
 </html>`;
 }
