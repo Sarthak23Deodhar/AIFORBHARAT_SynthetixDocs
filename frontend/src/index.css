@@ -6,37 +6,46 @@
 ═══════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── Light Mode (Premium) ── */
-  --bg-base: #f8fafc;
+  /* ── Strict Nature Palette (from User Image) ── */
+  --color-darkest: #12372A;
+  --color-dark: #436850;
+  --color-light: #ADBC9F;
+  --color-lightest: #FBFADA;
+
+  /* ── Light Mode (Nature Theme) ── */
+  --bg-base: var(--color-lightest);
   --bg-layer1: #ffffff;
-  --bg-layer2: #f1f5f9;
+  /* pure white for cards to pop against lightest background */
+  --bg-layer2: #eaf0e6;
+  /* very slight tint of lightest for contrast */
 
-  /* Soft premium shadows */
-  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
-  --shadow-md: 0 8px 24px -4px rgba(15, 23, 42, 0.08);
-  --shadow-lg: 0 20px 40px -8px rgba(15, 23, 42, 0.12);
+  /* Soft shadows */
+  --shadow-sm: 0 2px 8px rgba(18, 55, 42, 0.05);
+  --shadow-md: 0 8px 24px -4px rgba(18, 55, 42, 0.08);
+  --shadow-lg: 0 20px 40px -8px rgba(18, 55, 42, 0.12);
 
-  /* Text */
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
-  --text-bright: #000000;
+  /* Text Colors */
+  --text-primary: var(--color-darkest);
+  --text-secondary: var(--color-dark);
+  --text-muted: #6b8772;
+  /* Dark mixed with gray for less emphasis */
+  --text-bright: var(--color-darkest);
 
   /* Borders */
-  --border-soft: #e2e8f0;
-  --border-strong: #cbd5e1;
+  --border-soft: var(--color-light);
+  --border-strong: var(--color-dark);
 
-  /* ── Accents (Vibrant Saffron & Teal) ── */
-  --saffron: #f97316;
-  --saffron-dim: #ffedd5;
-  --teal: #0d9488;
-  --teal-dim: #ccfbf1;
-  --violet: #8b5cf6;
-  --violet-dim: #ede9fe;
+  /* Accents */
+  --saffron: var(--color-dark);
+  --saffron-dim: rgba(67, 104, 80, 0.15);
+  --teal: var(--color-darkest);
+  --teal-dim: rgba(18, 55, 42, 0.15);
+  --violet: var(--color-dark);
+  --violet-dim: rgba(67, 104, 80, 0.15);
 
-  --success: #10b981;
-  --danger: #f43f5e;
-  --warning: #f59e0b;
+  --success: var(--color-dark);
+  --danger: #d9534f;
+  --warning: #f0ad4e;
 
   /* ── Fonts ── */
   --font-display: 'Inter', -apple-system, sans-serif;
@@ -49,27 +58,33 @@
   --radius-lg: 24px;
 }
 
-/* ── Dark Mode (Premium) ── */
+/* ── Dark Mode (Nature Theme) ── */
 body.dark-mode {
-  --bg-base: #020617;
-  --bg-layer1: #0f172a;
-  --bg-layer2: #1e293b;
+  --bg-base: var(--color-darkest);
+  --bg-layer1: var(--color-dark);
+  --bg-layer2: #284c3e;
+  /* Between darkest and dark */
 
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 20px 40px -8px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  /* Deeper shadows for dark mode */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 40px -8px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(251, 250, 218, 0.05);
 
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-muted: #64748b;
+  --text-primary: var(--color-lightest);
+  --text-secondary: var(--color-light);
+  --text-muted: #8ca393;
   --text-bright: #ffffff;
 
-  --border-soft: rgba(255, 255, 255, 0.06);
-  --border-strong: rgba(255, 255, 255, 0.12);
+  --border-soft: rgba(173, 188, 159, 0.2);
+  /* color-light with opacity */
+  --border-strong: var(--color-light);
 
-  --saffron-dim: rgba(249, 115, 22, 0.15);
-  --teal-dim: rgba(13, 148, 136, 0.15);
-  --violet-dim: rgba(139, 92, 246, 0.15);
+  --saffron: var(--color-light);
+  --saffron-dim: rgba(173, 188, 159, 0.15);
+  --teal: var(--color-lightest);
+  --teal-dim: rgba(251, 250, 218, 0.15);
+  --violet: var(--color-light);
+  --violet-dim: rgba(173, 188, 159, 0.15);
 }
 
 /* ── Reset ────────────────────────────────────────────── */

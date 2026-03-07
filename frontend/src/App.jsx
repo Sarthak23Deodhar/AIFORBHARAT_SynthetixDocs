@@ -364,8 +364,8 @@ const styles = {
   editorPane: {
     display: 'flex',
     flexDirection: 'column',
-    borderRight: '1px solid rgba(255,255,255,0.06)',
-    background: '#080d18',
+    borderRight: '1px solid var(--border-soft)',
+    background: 'var(--bg-layer2)',
     minHeight: 0,
     overflow: 'hidden',
   },
@@ -435,8 +435,8 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: '7px 14px',
-    background: 'rgba(255,255,255,0.01)',
-    borderTop: '1px solid rgba(255,255,255,0.04)',
+    background: 'var(--bg-layer1)',
+    borderTop: '1px solid var(--border-soft)',
     flexShrink: 0,
   },
   footerHint: {
