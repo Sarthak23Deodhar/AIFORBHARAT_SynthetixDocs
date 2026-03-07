@@ -6,52 +6,49 @@
 ═══════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── Professional Slate & Indigo Palette ── */
-  --bg-base: #f1f5f9;
-  /* slate-100 */
+  /* ── Premium Light Mode (Whites, Purples, Blues) ── */
+  --bg-base: #f8fafc;
+  /* Off-white */
   --bg-layer1: #ffffff;
-  /* white */
-  --bg-layer2: #e2e8f0;
-  /* slate-200 */
+  /* Pure white */
+  --bg-layer2: #f1f5f9;
+  /* Light grayish blue */
 
-  /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.1);
-  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.1), 0 2px 4px -2px rgba(15, 23, 42, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.1), 0 4px 6px -4px rgba(15, 23, 42, 0.1);
+  /* Glowing Shadows & Borders */
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 15px -3px rgba(124, 58, 237, 0.1), 0 4px 6px -4px rgba(124, 58, 237, 0.05);
+  --shadow-lg: 0 20px 25px -5px rgba(124, 58, 237, 0.15), 0 8px 10px -6px rgba(124, 58, 237, 0.1);
 
-  /* Text Colors */
+  /* High Contrast Text */
   --text-primary: #0f172a;
-  /* slate-900 */
+  /* Near black */
   --text-secondary: #334155;
-  /* slate-700 */
+  /* Dark gray */
   --text-muted: #64748b;
-  /* slate-500 */
-  --text-bright: #020617;
-  /* slate-950 */
+  /* Slate gray */
+  --text-bright: #000000;
+  /* Solid black */
 
-  /* Borders */
-  --border-soft: #cbd5e1;
-  /* slate-300 */
-  --border-strong: #94a3b8;
-  /* slate-400 */
+  /* Structural Borders */
+  --border-soft: #e2e8f0;
+  /* Slate 200 */
+  --border-strong: #cbd5e1;
+  /* Slate 300 */
 
-  /* Accents */
-  --saffron: #4f46e5;
-  /* indigo-600 */
-  --saffron-dim: rgba(79, 70, 229, 0.15);
-  --teal: #0ea5e9;
-  /* sky-500 */
-  --teal-dim: rgba(14, 165, 233, 0.15);
-  --violet: #8b5cf6;
-  /* violet-500 */
-  --violet-dim: rgba(139, 92, 246, 0.15);
+  /* Accents (Purples and Blues) */
+  --saffron: #7c3aed;
+  /* Vivid Purple */
+  --saffron-dim: rgba(124, 58, 237, 0.12);
+  --teal: #2563eb;
+  /* Vibrant Blue */
+  --teal-dim: rgba(37, 99, 235, 0.12);
+  --violet: #9333ea;
+  /* Deep Purple */
+  --violet-dim: rgba(147, 51, 234, 0.12);
 
-  --success: #10b981;
-  /* emerald-500 */
-  --danger: #ef4444;
-  /* red-500 */
-  --warning: #f59e0b;
-  /* amber-500 */
+  --success: #059669;
+  --danger: #e11d48;
+  --warning: #d97706;
 
   /* ── Fonts ── */
   --font-display: 'Inter', -apple-system, sans-serif;
@@ -64,44 +61,44 @@
   --radius-lg: 24px;
 }
 
-/* ── Dark Mode (Professional Slate Scheme) ── */
+/* ── Premium Dark Mode (Blacks, Purples, Blues) ── */
 body.dark-mode {
-  --bg-base: #0f172a;
-  /* slate-900 */
-  --bg-layer1: #1e293b;
-  /* slate-800 */
-  --bg-layer2: #334155;
-  /* slate-700 */
+  --bg-base: #020617;
+  /* Deepest Black */
+  --bg-layer1: #0f172a;
+  /* Very Dark Slate Black */
+  --bg-layer2: #1e293b;
+  /* Slate Black */
 
-  /* Deeper shadows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 8px 16px -4px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 20px 40px -8px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  /* Glowing Neon Shadows */
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 10px 15px -3px rgba(139, 92, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --shadow-lg: 0 20px 25px -5px rgba(139, 92, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 
-  /* Light Text for dark bg */
+  /* High Contrast Text */
   --text-primary: #f8fafc;
-  /* slate-50 */
+  /* Pure white */
   --text-secondary: #cbd5e1;
-  /* slate-300 */
+  /* Light slate */
   --text-muted: #94a3b8;
-  /* slate-400 */
+  /* Muted slate */
   --text-bright: #ffffff;
-  /* white */
+  /* Pure white */
 
-  /* Borders */
+  /* Premium Borders */
   --border-soft: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.2);
+  --border-strong: rgba(255, 255, 255, 0.15);
 
-  /* Accents */
-  --saffron: #6366f1;
-  /* indigo-500 */
-  --saffron-dim: rgba(99, 102, 241, 0.15);
-  --teal: #38bdf8;
-  /* sky-400 */
-  --teal-dim: rgba(56, 189, 248, 0.15);
+  /* Accents (Purples and Blues - Lighter for Dark Mode) */
+  --saffron: #8b5cf6;
+  /* Bright Purple */
+  --saffron-dim: rgba(139, 92, 246, 0.2);
+  --teal: #3b82f6;
+  /* Bright Blue */
+  --teal-dim: rgba(59, 130, 246, 0.2);
   --violet: #a855f7;
-  /* purple-500 */
-  --violet-dim: rgba(168, 85, 247, 0.15);
+  /* Lighter Purple */
+  --violet-dim: rgba(168, 85, 247, 0.2);
 }
 
 /* ── Reset ────────────────────────────────────────────── */

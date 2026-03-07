@@ -219,7 +219,7 @@ module.exports.audioGenerator = async (event) => {
                 console.log('Auto-translate to English failed for Kajal.', e.message);
             }
 
-            translatedText = `Audio is currently only supported in Hindi and English. Here is the explanation in English. ` + fallbackText;
+            translatedText = fallbackText;
         } else if (transLang !== 'en') {
             try {
                 // Use 'auto' instead of 'en' so that if the text is ALREADY in the target language
@@ -260,7 +260,7 @@ module.exports.audioGenerator = async (event) => {
             const fallbackText = text.substring(0, 2800); // Use original English text
             const fallbackCmd = new SynthesizeSpeechCommand({
                 OutputFormat: 'mp3',
-                Text: "Sorry, audio is not natively supported for this language. Here is the explanation in English. " + fallbackText,
+                Text: fallbackText,
                 VoiceId: 'Kajal',
                 Engine: 'neural'
             });
@@ -342,8 +342,8 @@ Target Skill Level: ${skill_level.toUpperCase()}.
 If JUNIOR: Use simple analogies, step-by-step logic, and avoid dense jargon.
 If SENIOR: Focus on system architecture, design patterns, and in-depth details.
 
-CRITICAL INSTRUCTION FOR LANGUAGE: You MUST generate the documentation ENTIRELY in ${langName}!
-Do not use English for explanations unless ${langName} is English. Translate all headers, bullet points, and text into ${langName}. If ${langName} is a regional language like Hindi or Marathi, use the native written script (e.g., Devanagari).
+CRITICAL INSTRUCTION FOR LANGUAGE: You MUST generate the Section 1 Markdown Documentation ENTIRELY in ${langName}!
+Do not use English for explanations in Section 1 unless ${langName} is English. Translate all headers, bullet points, and text into ${langName}. Use the native written script (e.g., Devanagari) if applicable.
 
 Generate output in EXACTLY THREE sections separated by markers:
 
@@ -371,8 +371,8 @@ Target Skill Level: ${skill_level.toUpperCase()}.
 If JUNIOR: Use simple analogies, step-by-step logic, and avoid dense jargon.
 If SENIOR: Focus on system architecture, design patterns, and in-depth details.
 
-CRITICAL INSTRUCTION FOR LANGUAGE: You MUST generate the documentation ENTIRELY in ${langName}!
-Do not use English for explanations unless ${langName} is English. Translate all headers, bullet points, and text into ${langName}. If ${langName} is a regional language like Hindi or Marathi, use the native written script (e.g., Devanagari).
+CRITICAL INSTRUCTION FOR LANGUAGE: You MUST generate the Section 1 Markdown Documentation ENTIRELY in ${langName}!
+Do not use English for explanations in Section 1 unless ${langName} is English. Translate all headers, bullet points, and text into ${langName}. Use the native written script (e.g., Devanagari) if applicable.
 
 Generate output in EXACTLY THREE sections separated by markers:
 
