@@ -1,42 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 /* ═══════════════════════════════════════════════════════════
-   BHARAT NAVIGATOR — MINIMALIST THEME (DARK / LIGHT)
-   Clean borders, subtle shadows, high contrast, flat UI.
+   BHARAT NAVIGATOR — PREMIUM THEME (DARK / LIGHT)
+   Rich gradients, deep contrast, vibrant saffron and teal.
 ═══════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── Light Mode (Minimalist) ── */
-  --bg-base: #fafafa;
+  /* ── Light Mode (Premium) ── */
+  --bg-base: #f8fafc;
   --bg-layer1: #ffffff;
-  --bg-layer2: #f4f4f5;
+  --bg-layer2: #f1f5f9;
 
-  /* Subtle elevations instead of clay shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  /* Soft premium shadows */
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 8px 24px -4px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 20px 40px -8px rgba(15, 23, 42, 0.12);
 
   /* Text */
-  --text-primary: #18181b;
-  --text-secondary: #52525b;
-  --text-muted: #71717a;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
   --text-bright: #000000;
 
   /* Borders */
-  --border-soft: #e4e4e7;
-  --border-strong: #d4d4d8;
+  --border-soft: #e2e8f0;
+  --border-strong: #cbd5e1;
 
-  /* ── Accents (Crisp & Vibrant) ── */
-  --saffron: #2563eb;
-  /* Primary Blue instead of Saffron for standard minimalist look, but keeping variable name */
-  --saffron-dim: rgba(37, 99, 235, 0.1);
+  /* ── Accents (Vibrant Saffron & Teal) ── */
+  --saffron: #f97316;
+  --saffron-dim: #ffedd5;
   --teal: #0d9488;
-  --teal-dim: rgba(13, 148, 136, 0.1);
-  --violet: #7c3aed;
-  --violet-dim: rgba(124, 58, 237, 0.1);
+  --teal-dim: #ccfbf1;
+  --violet: #8b5cf6;
+  --violet-dim: #ede9fe;
 
-  --success: #16a34a;
-  --danger: #ef4444;
+  --success: #10b981;
+  --danger: #f43f5e;
   --warning: #f59e0b;
 
   /* ── Fonts ── */
@@ -44,29 +43,33 @@
   --font-body: 'Inter', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* ── Radius (Tighter radius for minimalist look) ── */
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
+  /* ── Radius ── */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
 }
 
-/* ── Dark Mode (Minimalist) ── */
+/* ── Dark Mode (Premium) ── */
 body.dark-mode {
-  --bg-base: #09090b;
-  --bg-layer1: #18181b;
-  --bg-layer2: #27272a;
+  --bg-base: #020617;
+  --bg-layer1: #0f172a;
+  --bg-layer2: #1e293b;
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 20px 40px -8px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 
-  --text-primary: #e4e4e7;
-  --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
   --text-bright: #ffffff;
 
-  --border-soft: #27272a;
-  --border-strong: #3f3f46;
+  --border-soft: rgba(255, 255, 255, 0.06);
+  --border-strong: rgba(255, 255, 255, 0.12);
+
+  --saffron-dim: rgba(249, 115, 22, 0.15);
+  --teal-dim: rgba(13, 148, 136, 0.15);
+  --violet-dim: rgba(139, 92, 246, 0.15);
 }
 
 /* ── Reset ────────────────────────────────────────────── */
@@ -109,7 +112,7 @@ code {
   font-family: var(--font-mono);
 }
 
-/* ── Minimalist Surface Classes (Overriding Claymorphism) ── */
+/* ── Premium Surface Classes (Glassmorphism & Claymorphism) ── */
 
 /* Flat Component */
 .neu-flat {
@@ -117,49 +120,54 @@ code {
   box-shadow: var(--shadow-sm);
   border-radius: var(--radius-md);
   border: 1px solid var(--border-soft);
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Convex / Elevated Component */
 .neu-convex {
-  background: var(--bg-layer1);
+  background: linear-gradient(135deg, var(--bg-layer1), var(--bg-base));
   box-shadow: var(--shadow-md);
   border-radius: var(--radius-md);
   border: 1px solid var(--border-soft);
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Pressed/Inset -> Simple Flat Gray */
+/* Pressed/Inset */
 .neu-pressed {
   background: var(--bg-layer2);
   border: 1px solid var(--border-soft);
   border-radius: var(--radius-md);
-  transition: all 0.2s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Cards */
+/* Premium Glass Cards */
 .glass-card,
 .clay-card {
-  background: var(--bg-layer1);
-  box-shadow: var(--shadow-sm);
+  background: rgba(var(--bg-layer1), 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-md);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-soft);
-  transition: all 0.2s ease;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-card:hover,
 .clay-card:hover {
   box-shadow: var(--shadow-lg);
-  border-color: var(--border-strong);
+  border-color: var(--saffron-dim);
+  transform: translateY(-2px);
 }
 
-/* ── Buttons ────────────────────────────────────────────── */
+/* ── Premium Buttons ─────────────────────────────────────── */
 .clay-button {
   font-family: var(--font-body);
   font-size: 14px;
-  font-weight: 500;
-  border-radius: var(--radius-sm);
-  padding: 8px 16px;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  padding: 10px 20px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -167,31 +175,50 @@ code {
   gap: 8px;
   background: var(--bg-layer1);
   color: var(--text-primary);
-  border: 1px solid var(--border-strong);
+  border: 1px solid var(--border-soft);
   box-shadow: var(--shadow-sm);
-  transition: all 0.15s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.clay-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 .clay-button:hover {
   background: var(--bg-layer2);
   color: var(--text-bright);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 .clay-button:active {
   transform: translateY(1px);
-  box-shadow: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .clay-button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 /* Primary Accent Button */
 .clay-button.primary {
-  background: var(--text-bright);
-  color: var(--bg-base);
-  border: 1px solid transparent;
+  background: linear-gradient(135deg, var(--saffron) 0%, #ea580c 100%);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 14px rgba(249, 115, 22, 0.4);
 }
 
 .clay-button.primary:hover {

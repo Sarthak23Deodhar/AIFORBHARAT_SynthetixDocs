@@ -59,6 +59,26 @@ function App() {
       .finally(() => setAuthChecked(true));
   }, []);
 
+  // Sync rightTab with URL hash to support browser back/forward buttons
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (['docs', 'greenops', 'governance', 'flow'].includes(hash)) {
+        setRightTab(hash);
+      } else if (!hash) {
+        window.location.hash = 'docs';
+      }
+    };
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const handleTabChange = (tab) => {
+    window.location.hash = tab;
+  };
+
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
     if (isDarkMode) {
@@ -280,14 +300,14 @@ function App() {
           <div style={styles.tabBar}>
             <button
               style={{ ...styles.tabBtn, ...(rightTab === 'docs' ? styles.tabActive : {}) }}
-              onClick={() => setRightTab('docs')}
+              onClick={() => handleTabChange('docs')}
             >
               <Code2 size={12} />
               {t(language, 'tabDocs').replace('📄 ', '')}
             </button>
             <button
               style={{ ...styles.tabBtn, ...(rightTab === 'greenops' ? styles.tabActiveGreen : {}) }}
-              onClick={() => setRightTab('greenops')}
+              onClick={() => handleTabChange('greenops')}
             >
               <Leaf size={12} />
               {t(language, 'tabGreenops').replace('🌱 ', '')}
@@ -295,14 +315,14 @@ function App() {
             </button>
             <button
               style={{ ...styles.tabBtn, ...(rightTab === 'governance' ? styles.tabActiveGov : {}) }}
-              onClick={() => setRightTab('governance')}
+              onClick={() => handleTabChange('governance')}
             >
               <ScrollText size={12} />
               {t(language, 'tabGovernance').replace('⚖️ ', '')}
             </button>
             <button
               style={{ ...styles.tabBtn, ...(rightTab === 'flow' ? styles.tabActiveOrchestrator : {}) }}
-              onClick={() => setRightTab('flow')}
+              onClick={() => handleTabChange('flow')}
             >
               <GitMerge size={12} />
               {t(language, 'tabOrchestrator').replace('⚙️ ', '')}
