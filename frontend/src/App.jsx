@@ -334,7 +334,7 @@ function App() {
             {rightTab === 'docs' && <WikiViewer language={language} skillLevel={skillLevel} sourceCode={sourceCode} />}
             {rightTab === 'greenops' && <GreenOpsPanel language={language} />}
             {rightTab === 'governance' && <SipTracker language={language} skillLevel={skillLevel} user={user} />}
-            {rightTab === 'flow' && <FlowDiagram sourceCode={sourceCode} language={language} />}
+            {rightTab === 'flow' && <OrchestrationPanel sourceCode={sourceCode} language={language} skillLevel={skillLevel} user={user} />}
           </div>
         </div>
       </main>

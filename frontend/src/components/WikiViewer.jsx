@@ -608,8 +608,11 @@ const styles = {
     },
     // Diagram pane
     diagramPane: {
+        flex: 1,
+        width: '100%',
+        height: '100%',
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'stretch',
         justifyContent: 'center',
         minHeight: '300px',
     },
