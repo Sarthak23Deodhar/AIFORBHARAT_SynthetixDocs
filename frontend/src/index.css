@@ -6,46 +6,52 @@
 ═══════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── Strict Nature Palette (from User Image) ── */
-  --color-darkest: #12372A;
-  --color-dark: #436850;
-  --color-light: #ADBC9F;
-  --color-lightest: #FBFADA;
-
-  /* ── Light Mode (Nature Theme) ── */
-  --bg-base: var(--color-lightest);
+  /* ── Professional Slate & Indigo Palette ── */
+  --bg-base: #f1f5f9;
+  /* slate-100 */
   --bg-layer1: #ffffff;
-  /* pure white for cards to pop against lightest background */
-  --bg-layer2: #eaf0e6;
-  /* very slight tint of lightest for contrast */
+  /* white */
+  --bg-layer2: #e2e8f0;
+  /* slate-200 */
 
-  /* Soft shadows */
-  --shadow-sm: 0 2px 8px rgba(18, 55, 42, 0.05);
-  --shadow-md: 0 8px 24px -4px rgba(18, 55, 42, 0.08);
-  --shadow-lg: 0 20px 40px -8px rgba(18, 55, 42, 0.12);
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.1), 0 2px 4px -2px rgba(15, 23, 42, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.1), 0 4px 6px -4px rgba(15, 23, 42, 0.1);
 
   /* Text Colors */
-  --text-primary: var(--color-darkest);
-  --text-secondary: var(--color-dark);
-  --text-muted: #6b8772;
-  /* Dark mixed with gray for less emphasis */
-  --text-bright: var(--color-darkest);
+  --text-primary: #0f172a;
+  /* slate-900 */
+  --text-secondary: #334155;
+  /* slate-700 */
+  --text-muted: #64748b;
+  /* slate-500 */
+  --text-bright: #020617;
+  /* slate-950 */
 
   /* Borders */
-  --border-soft: var(--color-light);
-  --border-strong: var(--color-dark);
+  --border-soft: #cbd5e1;
+  /* slate-300 */
+  --border-strong: #94a3b8;
+  /* slate-400 */
 
   /* Accents */
-  --saffron: var(--color-dark);
-  --saffron-dim: rgba(67, 104, 80, 0.15);
-  --teal: var(--color-darkest);
-  --teal-dim: rgba(18, 55, 42, 0.15);
-  --violet: var(--color-dark);
-  --violet-dim: rgba(67, 104, 80, 0.15);
+  --saffron: #4f46e5;
+  /* indigo-600 */
+  --saffron-dim: rgba(79, 70, 229, 0.15);
+  --teal: #0ea5e9;
+  /* sky-500 */
+  --teal-dim: rgba(14, 165, 233, 0.15);
+  --violet: #8b5cf6;
+  /* violet-500 */
+  --violet-dim: rgba(139, 92, 246, 0.15);
 
-  --success: var(--color-dark);
-  --danger: #d9534f;
-  --warning: #f0ad4e;
+  --success: #10b981;
+  /* emerald-500 */
+  --danger: #ef4444;
+  /* red-500 */
+  --warning: #f59e0b;
+  /* amber-500 */
 
   /* ── Fonts ── */
   --font-display: 'Inter', -apple-system, sans-serif;
@@ -58,33 +64,44 @@
   --radius-lg: 24px;
 }
 
-/* ── Dark Mode (Nature Theme) ── */
+/* ── Dark Mode (Professional Slate Scheme) ── */
 body.dark-mode {
-  --bg-base: var(--color-darkest);
-  --bg-layer1: var(--color-dark);
-  --bg-layer2: #284c3e;
-  /* Between darkest and dark */
+  --bg-base: #0f172a;
+  /* slate-900 */
+  --bg-layer1: #1e293b;
+  /* slate-800 */
+  --bg-layer2: #334155;
+  /* slate-700 */
 
-  /* Deeper shadows for dark mode */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
-  --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 20px 40px -8px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(251, 250, 218, 0.05);
+  /* Deeper shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 16px -4px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 20px 40px -8px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 
-  --text-primary: var(--color-lightest);
-  --text-secondary: var(--color-light);
-  --text-muted: #8ca393;
+  /* Light Text for dark bg */
+  --text-primary: #f8fafc;
+  /* slate-50 */
+  --text-secondary: #cbd5e1;
+  /* slate-300 */
+  --text-muted: #94a3b8;
+  /* slate-400 */
   --text-bright: #ffffff;
+  /* white */
 
-  --border-soft: rgba(173, 188, 159, 0.2);
-  /* color-light with opacity */
-  --border-strong: var(--color-light);
+  /* Borders */
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.2);
 
-  --saffron: var(--color-light);
-  --saffron-dim: rgba(173, 188, 159, 0.15);
-  --teal: var(--color-lightest);
-  --teal-dim: rgba(251, 250, 218, 0.15);
-  --violet: var(--color-light);
-  --violet-dim: rgba(173, 188, 159, 0.15);
+  /* Accents */
+  --saffron: #6366f1;
+  /* indigo-500 */
+  --saffron-dim: rgba(99, 102, 241, 0.15);
+  --teal: #38bdf8;
+  /* sky-400 */
+  --teal-dim: rgba(56, 189, 248, 0.15);
+  --violet: #a855f7;
+  /* purple-500 */
+  --violet-dim: rgba(168, 85, 247, 0.15);
 }
 
 /* ── Reset ────────────────────────────────────────────── */
@@ -387,9 +404,9 @@ body.dark-mode .clay-button.primary:hover {
 .markdown-body blockquote {
   border-left: 3px solid var(--saffron);
   padding: 4px 16px;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   margin: 1.2em 0;
-  background: transparent;
+  background: var(--bg-layer2);
 }
 
 /* ── Code input ──────────────────────────────────────────── */
@@ -505,7 +522,7 @@ body.dark-mode .clay-button.primary:hover {
 .react-flow__controls {
   background: var(--bg-layer1) !important;
   border: 1px solid var(--border-soft) !important;
-  box-shadow: var(--shadow-sm) !important;
+  box-shadow: var(--shadow-md) !important;
   border-radius: var(--radius-sm) !important;
   overflow: hidden;
 }

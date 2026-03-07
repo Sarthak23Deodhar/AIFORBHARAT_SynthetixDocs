@@ -194,8 +194,8 @@ const BhashaChat = ({ language, skillLevel, user }) => {
             >
                 <AnimatePresence mode="wait">
                     {isOpen
-                        ? <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}><X size={22} color="#000" /></motion.span>
-                        : <motion.span key="chat" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}><MessageSquare size={22} color="#000" /></motion.span>
+                        ? <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}><X size={22} color="currentcolor" /></motion.span>
+                        : <motion.span key="chat" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}><MessageSquare size={22} color="currentcolor" /></motion.span>
                     }
                 </AnimatePresence>
                 {!isOpen && <span style={styles.fabPulse} />}
@@ -219,15 +219,15 @@ const styles = {
         width: '60px',
         height: '60px',
         borderRadius: '50%',
-        background: 'var(--bg-layer1)',
+        background: 'var(--saffron)',
         border: 'none',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         cursor: 'pointer',
-        boxShadow: 'var(--clay-drop), var(--clay-inset-light), var(--clay-inset-dark)',
+        boxShadow: 'var(--shadow-lg)',
         position: 'relative',
-        color: 'var(--saffron)',
+        color: '#ffffff',
     },
     fabPulse: {
         position: 'absolute',
@@ -245,7 +245,7 @@ const styles = {
         border: '1px solid var(--border-soft)',
         borderRadius: '20px',
         overflow: 'hidden',
-        boxShadow: 'var(--clay-drop), var(--clay-inset-light), var(--clay-inset-dark)',
+        boxShadow: 'var(--shadow-lg)',
     },
     header: {
         padding: '16px 18px',
@@ -305,7 +305,7 @@ const styles = {
     closeBtn: {
         background: 'var(--bg-layer1)',
         border: 'none',
-        boxShadow: 'var(--clay-drop), var(--clay-inset-light), var(--clay-inset-dark)',
+        boxShadow: 'var(--shadow-sm)',
         borderRadius: '8px',
         cursor: 'pointer',
         color: 'var(--text-primary)',
@@ -334,7 +334,7 @@ const styles = {
         height: '24px',
         borderRadius: '8px',
         background: 'var(--bg-layer1)',
-        boxShadow: 'var(--clay-drop), var(--clay-inset-light), var(--clay-inset-dark)',
+        boxShadow: 'var(--shadow-sm)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -346,7 +346,7 @@ const styles = {
         height: '24px',
         borderRadius: '8px',
         background: 'var(--bg-layer2)',
-        boxShadow: 'inset 2px 2px 5px rgba(0,0,0,0.05), inset -2px -2px 5px rgba(255,255,255,0.6)',
+        boxShadow: 'var(--shadow-sm)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -362,7 +362,7 @@ const styles = {
         lineHeight: '1.65',
         background: 'var(--bg-layer1)',
         color: 'var(--text-secondary)',
-        boxShadow: 'var(--clay-drop), var(--clay-inset-light), var(--clay-inset-dark)',
+        boxShadow: 'var(--shadow-sm)',
     },
     userBubble: {
         maxWidth: '82%',
@@ -371,10 +371,10 @@ const styles = {
         borderBottomRightRadius: '4px',
         fontSize: '13px',
         lineHeight: '1.65',
-        background: 'var(--bg-layer2)',
-        color: 'var(--saffron)',
+        background: 'var(--saffron)',
+        color: '#ffffff',
         fontWeight: '600',
-        boxShadow: 'inset 2px 2px 5px rgba(0,0,0,0.05), inset -2px -2px 5px rgba(255,255,255,0.6)',
+        boxShadow: 'var(--shadow-sm)',
     },
     typingBubble: {
         display: 'flex',
@@ -392,15 +392,15 @@ const styles = {
         display: 'flex',
         gap: '10px',
         flexShrink: 0,
-        boxShadow: 'var(--clay-drop), var(--clay-inset-light), var(--clay-inset-dark)',
+        boxShadow: 'var(--shadow-sm)',
     },
     input: {
         flex: 1,
         padding: '11px 16px',
         borderRadius: '12px',
-        border: 'none',
+        border: '1px solid var(--border-soft)',
         background: 'var(--bg-layer2)',
-        boxShadow: 'inset 4px 4px 8px rgba(0,0,0,0.05), inset -4px -4px 8px rgba(255,255,255,0.7)',
+        boxShadow: 'none',
         color: 'var(--text-primary)',
         fontFamily: 'var(--font-body)',
         fontSize: '13px',
@@ -419,7 +419,7 @@ const styles = {
         justifyContent: 'center',
         color: '#ffffff',
         flexShrink: 0,
-        boxShadow: 'var(--clay-drop), inset 2px 2px 4px rgba(255,255,255,0.3)',
+        boxShadow: 'var(--shadow-sm)',
         transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
     },
 };

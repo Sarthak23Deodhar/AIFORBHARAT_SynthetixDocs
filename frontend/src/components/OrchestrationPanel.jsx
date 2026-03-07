@@ -167,7 +167,7 @@ export default function OrchestrationPanel({ language, skillLevel, sourceCode, u
                 <div style={styles.runWrap}>
                     <button onClick={run} style={styles.runBtn} id="orchestrate-run-btn">
                         <Play size={13} />
-                        {t(language, 'scanBtn')}
+                        {t(language, 'orchRunBtn')}
                     </button>
                     <div style={styles.runHint}>
                         {t(language, 'analyzeHint')}
