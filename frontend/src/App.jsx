@@ -282,7 +282,7 @@ function App() {
               </div>
               <div style={styles.explainBody}>
                 {explainText === 'loading'
-                  ? <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12, fontStyle: 'italic' }}>{t(language, 'explainAnalyzing')}</span>
+                  ? <span style={{ color: 'var(--text-muted)', fontSize: 12, fontStyle: 'italic' }}>{t(language, 'explainAnalyzing')}</span>
                   : <pre style={styles.explainPre}>{explainText}</pre>
                 }
               </div>
@@ -540,11 +540,11 @@ const styles = {
   },
   explainHeader: {
     display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-    padding: '8px 16px', borderBottom: '1px solid rgba(0,0,0,0.05)',
+    padding: '8px 16px', borderBottom: '1px solid var(--border-soft)',
     flexShrink: 0,
   },
   explainClose: {
-    background: 'none', border: 'none', color: 'rgba(255,255,255,0.3)',
+    background: 'none', border: 'none', color: 'var(--text-muted)',
     cursor: 'pointer', fontSize: '14px', lineHeight: 1, padding: '2px 4px',
   },
   explainBody: {
@@ -552,7 +552,7 @@ const styles = {
   },
   explainPre: {
     margin: 0, fontFamily: "'JetBrains Mono', monospace",
-    fontSize: '11px', lineHeight: 1.6, color: 'rgba(255,255,255,0.75)',
+    fontSize: '11px', lineHeight: 1.6, color: 'var(--text-secondary)',
     whiteSpace: 'pre-wrap', wordBreak: 'break-word',
   },
 };
