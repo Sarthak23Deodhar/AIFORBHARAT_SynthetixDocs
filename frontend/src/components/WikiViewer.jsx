@@ -105,6 +105,24 @@ const WikiViewer = ({ language, skillLevel, sourceCode }) => {
         };
     }, [sourceCode]); // eslint-disable-line react-hooks/exhaustive-deps
 
+    // Re-trigger documentation generation immediately when language changes
+    const prevLangRef = useRef(language);
+    useEffect(() => {
+        if (prevLangRef.current !== language) {
+            prevLangRef.current = language;
+            // Only re-generate if we already generated something for the current code
+            if (content && sourceCode && sourceCode.trim().length >= 30) {
+                // Stop any playing audio since it's for the old language
+                if (audioPlaying && audioRef.current) {
+                    audioRef.current.pause();
+                    setAudioPlaying(false);
+                }
+                generateDocs();
+            }
+        }
+    }, [language, content, sourceCode, audioPlaying]); // eslint-disable-line react-hooks/exhaustive-deps
+
+
     const generateDocs = async () => {
         if (!sourceCode.trim()) return;
         setIsGenerating(true);
