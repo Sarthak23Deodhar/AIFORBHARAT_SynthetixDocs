@@ -1,0 +1,74 @@
+{
+    "name": "synthetix-docs-maker",
+    "displayName": "Synthetix Docs Maker",
+    "description": "AI-Augmented Technical Navigator for Bharat: Analyze entire project folders and auto-generate documentation with Amazon Bedrock (Claude 3.5 Sonnet).",
+    "version": "0.1.0",
+    "publisher": "synthetix-ai-bharat",
+    "engines": {
+        "vscode": "^1.85.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "main": "./out/extension.js",
+    "activationEvents": [],
+    "contributes": {
+        "commands": [
+            {
+                "command": "synthetixDocsMaker.generate",
+                "title": "Generate Docs with AI (Synthetix)",
+                "icon": "$(book)"
+            },
+            {
+                "command": "synthetixDocsMaker.quickSearch",
+                "title": "Bhasha-Chat: Quick Ask AI",
+                "icon": "$(search)"
+            }
+        ],
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "synthetix-sidebar",
+                    "title": "Synthetix AI",
+                    "icon": "resources/icon.svg"
+                }
+            ]
+        },
+        "views": {
+            "synthetix-sidebar": [
+                {
+                    "type": "webview",
+                    "id": "synthetixDocsMaker.bhashaChat",
+                    "name": "Bhasha-Chat"
+                }
+            ]
+        },
+        "menus": {
+            "explorer/context": [
+                {
+                    "command": "synthetixDocsMaker.generate",
+                    "group": "navigation@10",
+                    "when": "explorerResourceIsFolder"
+                }
+            ],
+            "commandPalette": [
+                {
+                    "command": "synthetixDocsMaker.generate"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.85.0",
+        "@types/node": "^20.0.0",
+        "typescript": "^5.3.0"
+    },
+    "dependencies": {
+        "node-fetch": "^2.7.0"
+    }
+}

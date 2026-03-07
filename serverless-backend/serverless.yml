@@ -1,0 +1,231 @@
+service: aiforbharat-backend
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: us-east-1
+  timeout: 29
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1'
+    STORAGE_BUCKET_NAME: aiforbharat-storage-${sls:stage}-files
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "bedrock:InvokeModel"
+            - "aws-marketplace:ViewSubscriptions"
+            - "aws-marketplace:Subscribe"
+          Resource: "*"
+        - Effect: "Allow"
+          Action:
+            - "polly:SynthesizeSpeech"
+          Resource: "*"
+        - Effect: "Allow"
+          Action:
+            - "dynamodb:PutItem"
+            - "dynamodb:Query"
+            - "dynamodb:GetItem"
+          Resource: "*"
+        - Effect: "Allow"
+          Action:
+            - "translate:TranslateText"
+            - "comprehend:DetectKeyPhrases"
+            - "comprehend:DetectDominantLanguage"
+            - "s3:PutObject"
+            - "s3:GetObject"
+          Resource: "*"
+        - Effect: "Allow"
+          Action:
+            - "dynamodb:UpdateItem"
+            - "lambda:InvokeFunction"
+          Resource: "*"
+
+plugins:
+  - serverless-dotenv-plugin
+
+custom:
+  dotenv:
+    exclude:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - AWS_REGION
+      - AWS_SESSION_TOKEN
+
+functions:
+  chat:
+    handler: handler.queryProcessor
+    events:
+      - http:
+          path: /api/chat
+          method: post
+          cors: true
+
+  audio:
+    handler: handler.audioGenerator
+    events:
+      - http:
+          path: /api/audio
+          method: post
+          cors: true
+
+  wiki:
+    handler: handler.wikiBuilder
+    events:
+      - http:
+          path: /api/generate-wiki
+          method: post
+          cors: true
+
+  scan:
+    handler: handler.securityScanner
+    events:
+      - http:
+          path: /api/scan
+          method: post
+          cors: true
+
+  getProfile:
+    handler: handler.getProfile
+    events:
+      - http:
+          path: /api/profile
+          method: get
+          cors: true
+
+  saveProfile:
+    handler: handler.saveProfile
+    events:
+      - http:
+          path: /api/profile
+          method: put
+          cors: true
+
+  webhook:
+    handler: handler.webhookHandler
+    events:
+      - http:
+          path: /api/webhook/github
+          method: post
+          cors: true
+
+  governance:
+    handler: handler.governanceHandler
+    events:
+      - http:
+          path: /api/governance
+          method: get
+          cors: true
+
+  orchestrate:
+    handler: handler.orchestrator
+    timeout: 60
+    events:
+      - http:
+          path: /api/orchestrate
+          method: post
+          cors: true
+
+  adapt:
+    handler: handler.contentAdapter
+    events:
+      - http:
+          path: /api/adapt
+          method: post
+          cors: true
+
+
+resources:
+  Resources:
+    UserChatHistoryTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: UserChatHistory
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: S
+          - AttributeName: timestamp
+            AttributeType: N
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+          - AttributeName: timestamp
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
+
+    UserProfilesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: UserProfiles
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+    LearningPathsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: LearningPaths
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+    # AWS OpenSearch Serverless (Vector RAG Placeholder)
+    # Provisioning OpenSearch Serverless takes 5-10 minutes and requires Encryption/Network policies.
+    # To fully enable this, uncomment the below collection and attach a `AWS::OpenSearchServerless::SecurityPolicy`.
+    # VectorStoreCollection:
+    #   Type: AWS::OpenSearchServerless::Collection
+    #   Properties:
+    #     Name: synthetix-vector-store
+    #     Type: VECTORSEARCH
+    #     Description: "Serverless Vector DB for Synthetix Docs Semantic Search"
+
+    CognitoUserPool:
+      Type: AWS::Cognito::UserPool
+      Properties:
+        UserPoolName: aiforbharat-user-pool
+        UsernameAttributes:
+          - email
+        AutoVerifiedAttributes:
+          - email
+
+    CognitoUserPoolClient:
+      Type: AWS::Cognito::UserPoolClient
+      Properties:
+        ClientName: aiforbharat-client
+        UserPoolId:
+          Ref: CognitoUserPool
+        ExplicitAuthFlows:
+          - ALLOW_USER_SRP_AUTH
+          - ALLOW_REFRESH_TOKEN_AUTH
+          - ALLOW_USER_PASSWORD_AUTH
+        PreventUserExistenceErrors: ENABLED
+
+    AppStorageBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: aiforbharat-storage-${sls:stage}-files
+        CorsConfiguration:
+          CorsRules:
+            - AllowedHeaders:
+                - '*'
+              AllowedMethods:
+                - GET
+                - PUT
+              AllowedOrigins:
+                - '*'
+
+  Outputs:
+    UserPoolId:
+      Value:
+        Ref: CognitoUserPool
+    UserPoolClientId:
+      Value:
+        Ref: CognitoUserPoolClient

@@ -1,0 +1,29 @@
+{
+  "name": "serverless-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "serverless.cmd deploy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.997.0",
+    "@aws-sdk/client-comprehend": "^3.1000.0",
+    "@aws-sdk/client-dynamodb": "^3.1000.0",
+    "@aws-sdk/client-polly": "^3.997.0",
+    "@aws-sdk/client-s3": "^3.1000.0",
+    "@aws-sdk/client-translate": "^3.1000.0",
+    "@aws-sdk/s3-request-presigner": "^3.1000.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1"
+  },
+  "devDependencies": {
+    "serverless": "^3.40.0",
+    "serverless-dotenv-plugin": "^6.0.0"
+  }
+}
