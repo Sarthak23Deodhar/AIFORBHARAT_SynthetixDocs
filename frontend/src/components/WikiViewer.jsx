@@ -93,38 +93,17 @@ const WikiViewer = ({ language, skillLevel, sourceCode }) => {
     const mermaidRef = useRef(null);
     const audioRef = useRef(null);
 
-    // Auto-generate docs when sourceCode changes (debounced 2s)
-    useEffect(() => {
-        if (!sourceCode || sourceCode.trim().length < 30) return;
-        if (debounceRef.current) clearTimeout(debounceRef.current);
-        debounceRef.current = setTimeout(() => {
-            generateDocs();
-        }, 2000);
-        return () => {
-            if (debounceRef.current) clearTimeout(debounceRef.current);
-        };
-    }, [sourceCode]); // eslint-disable-line react-hooks/exhaustive-deps
-
-    // Re-trigger documentation generation immediately when language changes
-    const prevLangRef = useRef(language);
-    useEffect(() => {
-        if (prevLangRef.current !== language) {
-            prevLangRef.current = language;
-            // Only re-generate if we already generated something for the current code
-            if (content && sourceCode && sourceCode.trim().length >= 30) {
-                // Stop any playing audio since it's for the old language
-                if (audioPlaying && audioRef.current) {
-                    audioRef.current.pause();
-                    setAudioPlaying(false);
-                }
-                generateDocs();
-            }
-        }
-    }, [language, content, sourceCode, audioPlaying]); // eslint-disable-line react-hooks/exhaustive-deps
-
+    // Ref: Removed auto-generate hooks that were here (debounceRef for sourceCode and prevLangRef for language)
 
     const generateDocs = async () => {
         if (!sourceCode.trim()) return;
+
+        // Stop any currently playing audio before generating new ones
+        if (audioPlaying && audioRef.current) {
+            audioRef.current.pause();
+            setAudioPlaying(false);
+        }
+
         setIsGenerating(true);
         setContent('');
         setMermaidCode('');
@@ -140,15 +119,22 @@ const WikiViewer = ({ language, skillLevel, sourceCode }) => {
 
             setContent(wikiData.wiki_md || 'No documentation generated.');
             setMermaidCode(wikiData.mermaid_code || '');
-            setAudioScript(wikiData.audio_text || '');
+            const newAudioScript = wikiData.audio_text || '';
+            setAudioScript(newAudioScript);
 
             // Security scan in parallel
             const scanData = await fetchWithFallback(`${API_BASE}/scan`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ code_snippet: sourceCode })
+                body: JSON.stringify({ code_snippet: sourceCode, language })
             });
             if (scanData.advisories?.length > 0) setAdvisory(scanData.advisories[0]);
+
+            // Auto trigger audio synthesis after successful generation
+            if (newAudioScript) {
+                synthesizeAudio(newAudioScript, language);
+            }
+
         } catch (err) {
             console.error(err);
             setContent('⚠️ Error connecting to the AI engine. Make sure AWS credentials are configured.');
@@ -157,15 +143,18 @@ const WikiViewer = ({ language, skillLevel, sourceCode }) => {
         }
     };
 
-    const synthesizeAudio = async () => {
+    const synthesizeAudio = async (textToSpeakParam, langParam) => {
         setIsSynthesizing(true);
         try {
-            const textToSpeak = audioScript || 'Documentation is ready.';
+            const textToSpeak = textToSpeakParam || audioScript || 'Documentation is ready.';
+            const langToUse = langParam || language;
+
             const data = await fetchWithFallback(`${API_BASE}/audio`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text: textToSpeak, language })
+                body: JSON.stringify({ text: textToSpeak, language: langToUse })
             });
+
             if (data.audio_url) {
                 if (audioRef.current) {
                     audioRef.current.src = data.audio_url;
@@ -232,6 +221,15 @@ const WikiViewer = ({ language, skillLevel, sourceCode }) => {
                 </div>
 
                 <div style={styles.toolbarActions}>
+                    {/* Manual Generate Button */}
+                    <button
+                        style={{ ...styles.audioBtn, background: '#10b981', color: '#fff', boxShadow: 'none' }}
+                        onClick={generateDocs}
+                        disabled={isGenerating || !sourceCode?.trim()}
+                    >
+                        {isGenerating ? 'Generating...' : 'Generate Docs'}
+                    </button>
+
                     {/* Download button — always show when docs exist */}
                     {content && !isGenerating && (
                         <button
@@ -364,8 +362,8 @@ const WikiViewer = ({ language, skillLevel, sourceCode }) => {
                                 <div style={{ ...styles.sevHeader, background: sev.bg, border: `1px solid ${sev.border}` }}>
                                     <ShieldCheck size={20} color={sev.color} />
                                     <div>
-                                        <div style={{ ...styles.sevTitle, color: sev.color }}>{advisory.severity} Severity — {advisory.id}</div>
-                                        <div style={styles.sevSub}>OWASP Vulnerability Scan by Amazon Bedrock</div>
+                                        <div style={{ ...styles.sevTitle, color: sev.color }}>{advisory.severity} {t(language, 'secSeverity')} — {advisory.id}</div>
+                                        <div style={styles.sevSub}>{t(language, 'secScanBy')}</div>
                                     </div>
                                     <span style={{ ...styles.sevPill, background: sev.bg, color: sev.color, border: `1px solid ${sev.border}` }}>
                                         {advisory.severity}
@@ -373,12 +371,12 @@ const WikiViewer = ({ language, skillLevel, sourceCode }) => {
                                 </div>
 
                                 <div style={styles.sevBlock}>
-                                    <div style={styles.sevBlockLabel}>🔍 Finding</div>
+                                    <div style={styles.sevBlockLabel}>🔍 {t(language, 'secFinding')}</div>
                                     <p style={styles.sevBlockText}>{advisory.description}</p>
                                 </div>
 
                                 <div style={{ ...styles.sevBlock, borderColor: 'rgba(251,191,36,0.2)', background: 'rgba(251,191,36,0.04)' }}>
-                                    <div style={{ ...styles.sevBlockLabel, color: '#FBBF24' }}>🔧 Remediation</div>
+                                    <div style={{ ...styles.sevBlockLabel, color: '#FBBF24' }}>🔧 {t(language, 'secRemediation')}</div>
                                     <p style={styles.sevBlockText}>{advisory.remediation}</p>
                                 </div>
                             </>

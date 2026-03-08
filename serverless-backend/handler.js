@@ -321,9 +321,9 @@ Example: A["User Input"] --> B["Processing Module"]
 Section 3: Audio Script. Start it with "---AUDIO---".
 Write a concise 3-sentence summary of the codebase. 
 CRITICAL INSTRUCTION: 
-If \${langName} is English, write in English. 
-If \${langName} is Hindi, write in Hindi using Devanagari script. 
-FOR ALL OTHER LANGUAGES (like Marathi, Tamil, Telugu, Kannada, Bengali, Odia, etc.), you MUST transliterate the \${langName} translation into English alphabets (Roman / Latin script). For example, do not use native scripts; instead write "Namaskar, idhu oru React application" (phonetic spelling of the regional language). The audio system will read this text using an Indian English voice, so spell it phonetically!
+If ${langName} is English, write strictly in plain English (DO NOT transliterate, DO NOT use Hindi words). 
+If ${langName} is Hindi, write in Hindi using Devanagari script. 
+FOR ALL OTHER LANGUAGES (like Marathi, Tamil, Telugu, Kannada, Bengali, Odia, etc.), you MUST FIRST translate the summary into ${langName}. Then, write those ${langName} words using the English alphabet (Roman/Latin script). YOU MUST NOT USE ENGLISH WORDS! For example, transliterate the ${langName} words phonetically like "Namaskar, idhu oru React application". If you use English words, the audio will fail. The audio system will read this phonetic text using an Indian voice.
 
 Codebase:
 \`\`\`
@@ -354,9 +354,9 @@ Example: A["User Input"] --> B["Processing Module"]
 Section 3: Audio Script. Start it with "---AUDIO---".
 Write a concise 3-sentence summary of the codebase. 
 CRITICAL INSTRUCTION: 
-If \${langName} is English, write in English. 
-If \${langName} is Hindi, write in Hindi using Devanagari script. 
-FOR ALL OTHER LANGUAGES (like Marathi, Tamil, Telugu, Kannada, Bengali, Odia, etc.), you MUST transliterate the \${langName} translation into English alphabets (Roman / Latin script). For example, do not use native scripts; instead write "Namaskar, idhu oru React application" (phonetic spelling of the regional language). The audio system will read this text using an Indian English voice, so spell it phonetically!
+If ${langName} is English, write strictly in plain English (DO NOT transliterate, DO NOT use Hindi words). 
+If ${langName} is Hindi, write in Hindi using Devanagari script. 
+FOR ALL OTHER LANGUAGES (like Marathi, Tamil, Telugu, Kannada, Bengali, Odia, etc.), you MUST FIRST translate the summary into ${langName}. Then, write those ${langName} words using the English alphabet (Roman/Latin script). YOU MUST NOT USE ENGLISH WORDS! For example, transliterate the ${langName} words phonetically like "Namaskar, idhu oru React application". If you use English words, the audio will fail. The audio system will read this phonetic text using an Indian voice.
 
 Code:
 \`\`\`${language}
@@ -422,7 +422,7 @@ ${code_snippet.substring(0, 10000)}
 module.exports.securityScanner = async (event) => {
     try {
         const body = event.body ? JSON.parse(event.body) : {};
-        const { code_snippet = '' } = body;
+        const { code_snippet = '', language = 'en' } = body;
 
         // If no code provided, return a generic advisory
         if (!code_snippet.trim()) {
@@ -444,6 +444,8 @@ module.exports.securityScanner = async (event) => {
 
         const prompt = `You are Suraksha-Audit, an AI security scanner built for Bharat developers.
 Analyze the following code for security vulnerabilities, focusing on the OWASP Top 10 and common coding mistakes.
+
+CRITICAL INSTRUCTION: You must write the "description" and "remediation" fields entirely in the language corresponding to this ISO code: ${language}. (For example, if the code is 'hi', write in flawless Hindi; if 'te', write in Telugu script; if 'en', write in English). The "id" and "severity" fields must remain in English.
 
 Code to analyze:
 \`\`\`

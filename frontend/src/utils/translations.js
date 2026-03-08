@@ -96,6 +96,10 @@ const T = {
         noScanner: 'No findings returned by scanner.',
         noReport: 'No report generated.',
         confLvl: '% conf',
+        secSeverity: 'Severity',
+        secScanBy: 'OWASP Vulnerability Scan by Amazon Bedrock',
+        secFinding: 'Finding',
+        secRemediation: 'Remediation',
     },
 
     hi: {
@@ -178,6 +182,10 @@ const T = {
         noScanner: 'स्कैनर द्वारा कोई निष्कर्ष नहीं लौटाया गया।',
         noReport: 'कोई रिपोर्ट उत्पन्न नहीं हुई।',
         confLvl: '% विश्वास',
+        secSeverity: 'गंभीरता (Severity)',
+        secScanBy: 'Amazon Bedrock द्वारा OWASP भेद्यता स्कैन',
+        secFinding: 'खोज (Finding)',
+        secRemediation: 'सुधार (Remediation)',
     },
 
     mr: {
@@ -260,6 +268,10 @@ const T = {
         noScanner: 'स्कॅनरद्वारे कोणतेही निष्कर्ष दिले नाहीत.',
         noReport: 'कोणताही अहवाल व्युत्पन्न झाला नाही.',
         confLvl: '% विश्वास',
+        secSeverity: 'तीव्रता (Severity)',
+        secScanBy: 'Amazon Bedrock द्वारे OWASP भेद्यता स्कॅन',
+        secFinding: 'शोध (Finding)',
+        secRemediation: 'उपाय (Remediation)',
     },
 
     ta: {
@@ -342,6 +354,10 @@ const T = {
         noScanner: 'ஸ்கேனர் எந்த கண்டுபிடிப்புகளையும் வழங்கவில்லை.',
         noReport: 'எந்த அறிக்கையும் உருவாக்கப்படவில்லை.',
         confLvl: '% நம்பகத்தன்மை',
+        secSeverity: 'தீவிரம் (Severity)',
+        secScanBy: 'Amazon Bedrock வழங்கும் OWASP பாதிப்பு ஸ்கேன்',
+        secFinding: 'கண்டுபிடிப்பு (Finding)',
+        secRemediation: 'தீர்வு (Remediation)',
     },
 
     te: {
@@ -424,6 +440,10 @@ const T = {
         noScanner: 'స్కానర్ ద్వారా ఎలాంటి ఫలితాలు తిరిగి రాలేదు.',
         noReport: 'ఎటువంటి నివేదిక రూపొందించబడలేదు.',
         confLvl: '% నమ్మకం',
+        secSeverity: 'తీవ్రత (Severity)',
+        secScanBy: 'Amazon Bedrock ద్వారా OWASP దుర్బలత్వ స్కాన్',
+        secFinding: 'కనుగొనబడినవి (Finding)',
+        secRemediation: 'పరిష్కారం (Remediation)',
     },
 
     kn: {
